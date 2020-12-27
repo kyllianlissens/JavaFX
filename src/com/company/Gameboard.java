@@ -20,4 +20,14 @@ public class Gameboard {
         this(30,30);
     }
 
+    public boolean placeBlock(Block block, Point point){
+        for (Point p : block.shape.getTiles()) {
+
+        }
+
+
+        return false;
+
+    }
+
 }
