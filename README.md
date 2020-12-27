@@ -4,9 +4,13 @@ Java FX project 2020
 ## Todo:
 - [x] Main classes
 - [x] Enum logic
-- [ ] Figure logic of storing unused/used points
-- [ ] Block placement
-- [ ] Console display of board
+- [ ] Finish logic of storing unused/used points
+- [ ] Cleanup Block placement
+- [ ] Better console display of board
+- [ ] Add more shapes
+- [ ] Highscore IO / Logic
+- [ ] User logic
+- [ ] Score logic based on BlockShape difficulty
 
 ## Logs:
 ###28/12:
