@@ -14,6 +14,7 @@ public class Game {
     }
 
     public void generateNewBlocks(){
+        //This feels off to init the array and then fill it?
         blocksToBeUsed.clear();
         for (int i = 0; i < 3; i++) {
             blocksToBeUsed.add(new Block(BlockShape.randomEnum()));
