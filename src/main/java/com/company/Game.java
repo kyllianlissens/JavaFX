@@ -1,5 +1,6 @@
 package com.company;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -11,7 +12,7 @@ public class Game {
     private UserReaderWriter userReaderWriter;
 
 
-    public Game (){
+    public Game () throws IOException {
         gameBoard = new Gameboard();
         blocksToBeUsed = new ArrayList<Block>();
         generateNewBlocks();
@@ -31,7 +32,7 @@ public class Game {
     public User register(String username, String wachtwoord) throws Exception{
         return userReaderWriter.register(username, wachtwoord);
     }
-    public void shutDown(){
+    public void save(){
         userReaderWriter.save();
     }
     public List<User> getUserSortedByHighscore(){
