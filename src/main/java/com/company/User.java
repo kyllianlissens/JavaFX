@@ -1,8 +1,13 @@
 package com.company;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 public class User {
+
+
+    private String username;
+    private String password;
+    private int highscore;
 
     public User(){} //Empty constructor for Jackson
 
@@ -15,12 +20,6 @@ public class User {
     public User(String username, String password){
         this(username, password, 0);
     }
-
-
-
-    private String username;
-    private String password;
-    private int highscore;
 
 
     public String getUsername() {

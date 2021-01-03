@@ -6,9 +6,6 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.*;
 import java.util.List;
-import  java.util.Collections;
-
-
 
 public class UserReaderWriter {
     public List<User> users;
@@ -16,16 +13,21 @@ public class UserReaderWriter {
     public UserReaderWriter() {
         System.out.println("-----------------------------");
         System.out.println("Loading users!");
+
         ObjectMapper mapper = new ObjectMapper();
+
         try{
             users = mapper.readValue(new File("highscores.json"), new TypeReference<List<User>>(){});
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         System.out.println("Users loaded!");
+
         for (User user : users){
             System.out.println(user.toString());
         }
+
         System.out.println("-----------------------------\n");
 
     }

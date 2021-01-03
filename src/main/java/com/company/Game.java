@@ -36,7 +36,7 @@ public class Game {
         userReaderWriter.save();
     }
     public List<User> getUserSortedByHighscore(){
-        return userReaderWriter.getUsers().stream().sorted(Comparator.comparing(User::getHighscore).reversed()).collect(Collectors.toList());
+        return userReaderWriter.users.stream().sorted(Comparator.comparing(User::getHighscore).reversed()).collect(Collectors.toList());
     }
 
 
