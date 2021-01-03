@@ -6,11 +6,27 @@ import java.util.List;
 
 public class Block {
 
-    public BlockShape shape;
+    private BlockShape shape;
 
-    public Point location; //Location of the block, unneeded?
+    private Point location; //Location of the block, unneeded?
 
     public Block(BlockShape Shape){
-            shape = Shape;
+            this.shape = Shape;
+    }
+
+    public BlockShape getShape() {
+        return shape;
+    }
+
+    public void setShape(BlockShape shape) {
+        this.shape = shape;
+    }
+
+    public Point getLocation() {
+        return location;
+    }
+
+    public void setLocation(Point location) {
+        this.location = location;
     }
 }

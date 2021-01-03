@@ -11,34 +11,19 @@ public class UserReaderWriter {
     public List<User> users;
 
     public UserReaderWriter() {
-        System.out.println("-----------------------------");
-        System.out.println("Loading users!");
-
         ObjectMapper mapper = new ObjectMapper();
-
         try{
             users = mapper.readValue(new File("highscores.json"), new TypeReference<List<User>>(){});
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        System.out.println("Users loaded!");
-
-        for (User user : users){
-            System.out.println(user.toString());
-        }
-
-        System.out.println("-----------------------------\n");
-
     }
 
     public User register(String username, String wachtwoord) throws Exception{
-
         for (User user: users) {
             if(user.getUsername().equalsIgnoreCase(username)){
-                throw new Exception("Username bestaat al!");
+                throw new Exception("Username already taken!");
             }
-
         }
 
         User user = new User(username, BCrypt.hashpw(wachtwoord,BCrypt.gensalt()));
@@ -55,16 +40,15 @@ public class UserReaderWriter {
                     return user;
                 }
                 else{
-                    throw new Exception("Incorrecte wachtwoord");
+                    throw new Exception("Incorrect password!");
                 }
             }
         }
-       throw new Exception("User met " + username + " bestaat niet!");
+       throw new Exception("User " + username + " non exsisting!");
 
     }
     public void save(){
         ObjectMapper mapper = new ObjectMapper();
-
         try {
             mapper.writeValue(new File("highscores.json"), users);
         } catch (IOException e) {

@@ -12,7 +12,7 @@ public class Game {
     private UserReaderWriter userReaderWriter;
 
 
-    public Game () throws IOException {
+    public Game () {
         gameBoard = new Gameboard();
         blocksToBeUsed = new ArrayList<Block>();
         generateNewBlocks();
@@ -35,9 +35,12 @@ public class Game {
     public void save(){
         userReaderWriter.save();
     }
+
     public List<User> getUserSortedByHighscore(){
         return userReaderWriter.users.stream().sorted(Comparator.comparing(User::getHighscore).reversed()).collect(Collectors.toList());
     }
+
+
 
 
 }

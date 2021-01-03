@@ -4,7 +4,13 @@ import java.util.ArrayList;
 
 
 public class Gameboard {
-    public ArrayList<ArrayList<Rectangle>> pointGrid;
+
+    /*
+        Nothing needs setters here since the values are only declared on initialization
+
+
+     */
+    private ArrayList<ArrayList<Rectangle>> pointGrid;
 
     private final int sizeX;
     private final int sizeY;
@@ -27,23 +33,30 @@ public class Gameboard {
     }
 
     public boolean placeBlock(Block block, Point point){
-
-        //Some stupid calculations I have to cleanup
-        for (Point p : block.shape.getTiles()) {
+        for (Point p : block.getShape().getTiles()) {
+            Point calcPoint = new Point(point.x + p.x, point.y + p.y);
             System.out.println("Shape Point: " + p.toString());
             System.out.println("Point location: " + point.toString());
-            Point calcPoint = new Point(point.x + p.x, point.y + p.y);
             System.out.println("Calculated location: " + calcPoint.toString());
             Rectangle gridPoint = pointGrid.get(calcPoint.y).get(calcPoint.x);
             if (gridPoint.getColor() == Color.WHITE){
-                return false;
+                return false; //WHITE = Block already has been placed there.
             }
             gridPoint.setColor(Color.WHITE);
         }
-
-
         return true;
 
     }
 
+    public ArrayList<ArrayList<Rectangle>> getPointGrid() {
+        return pointGrid;
+    }
+
+    public int getSizeX() {
+        return sizeX;
+    }
+
+    public int getSizeY() {
+        return sizeY;
+    }
 }
