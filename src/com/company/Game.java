@@ -1,16 +1,21 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Game {
     public Gameboard gameBoard;
     public List<Block> blocksToBeUsed;
+    private UserReaderWriter userReaderWriter;
+
 
     public Game (){
         gameBoard = new Gameboard();
         blocksToBeUsed = new ArrayList<Block>();
         generateNewBlocks();
+        userReaderWriter = new UserReaderWriter();
     }
 
     public void generateNewBlocks(){
@@ -19,6 +24,18 @@ public class Game {
         for (int i = 0; i < 3; i++) {
             blocksToBeUsed.add(new Block(BlockShape.randomEnum()));
         }
+    }
+    public User login(String username, String wachtwoord) throws Exception {
+        return userReaderWriter.login(username, wachtwoord);
+    }
+    public User register(String username, String wachtwoord) throws Exception{
+        return userReaderWriter.register(username, wachtwoord);
+    }
+    public void shutDown(){
+        userReaderWriter.save();
+    }
+    public List<User> getUserSortedByHighscore(){
+        return userReaderWriter.getUsers().stream().sorted(Comparator.comparing(User::getHighscore).reversed()).collect(Collectors.toList());
     }
 
 
