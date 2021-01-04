@@ -8,7 +8,11 @@ import java.io.*;
 import java.util.List;
 
 public class UserReaderWriter {
-    public List<User> users;
+    private List<User> users;
+
+    public List<User> getUsers() {
+        return users;
+    }
 
     public UserReaderWriter() {
         ObjectMapper mapper = new ObjectMapper();
@@ -19,14 +23,14 @@ public class UserReaderWriter {
         }
     }
 
-    public User register(String username, String wachtwoord) throws Exception{
+    public User register(String username, String password) throws Exception{
         for (User user: users) {
             if(user.getUsername().equalsIgnoreCase(username)){
                 throw new Exception("Username already taken!");
             }
         }
 
-        User user = new User(username, BCrypt.hashpw(wachtwoord,BCrypt.gensalt()));
+        User user = new User(username, BCrypt.hashpw(password,BCrypt.gensalt()));
         users.add(user);
         save();
         return user;

@@ -1,11 +1,8 @@
 package com.company;
 
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 import java.util.Scanner;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Main {
 
@@ -47,10 +44,11 @@ public class Main {
                 String registerUsername = scanner.next();
                 System.out.print("Password: ");
                 String registerPassword = scanner.next();
-                playGame();
+
                 try {
                     game.register(registerUsername, registerPassword);
                     System.out.println("Successful register!");
+                    playGame();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -70,13 +68,29 @@ public class Main {
 
     }
     public static void playGame(){
-        System.out.println(game.gameBoard.placeBlock(game.blocksToBeUsed.get(0), new Point(2,2)));//ugly 2 block placement
-        System.out.println(game.gameBoard.placeBlock(game.blocksToBeUsed.get(1), new Point(2,2)));//this one should fail
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+
+        System.out.println("|-------------------------------------------|");
+        System.out.println(" Welcome, " + game.getUser().getUsername() + "! ");
+        System.out.println(" Current highscore: " + game.getUser().getHighscore());
+        System.out.println("|-------------------------------------------|");
+        Scanner scanner = new Scanner(System.in);
+        boolean alive = true;
+        while (alive){
+
+
+
+        }
+
+
+        System.out.println(game.getGameBoard().placeBlock(game.getBlocksToBeUsed().get(0), new Point(2,2)));//ugly 2 block placement
+        System.out.println(game.getGameBoard().placeBlock(game.getBlocksToBeUsed().get(1), new Point(2,2)));//this one should fail
 
         //Simple 2D iteration to view which tiles have a white rectangle or not
         for (int y = 0; y < 5; y++) {
             for (int x = 0; x < 5; x++) {
-                System.out.print(game.gameBoard.getPointGrid().get(y).get(x).getColor().equals(Color.white) ? 1 + " ": 0 + " ");
+                System.out.print(game.getGameBoard().getPointGrid().get(y).get(x).getColor().equals(Color.white) ? 1 + " ": 0 + " ");
             }
             System.out.println();
         }
