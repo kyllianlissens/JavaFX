@@ -23,13 +23,9 @@ public class UserReaderWriter {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String fileContent = br.lines().collect(Collectors.joining());
             users = mapper.readValue(fileContent, new TypeReference<List<User>>(){});
-        } catch (FileNotFoundException fileNotFoundException) {
+        } catch (IOException fileNotFoundException) {
             fileNotFoundException.printStackTrace();
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
         }
-
-
 
 
     }

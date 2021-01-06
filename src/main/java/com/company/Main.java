@@ -1,8 +1,6 @@
 package com.company;
 
 import java.awt.*;
-import java.io.IOException;
-import java.nio.file.LinkOption;
 import java.util.Scanner;
 
 
@@ -76,8 +74,7 @@ public class Main {
         System.out.println(" Current highscore: " + game.getUser().getHighscore());
         System.out.println("|-------------------------------------------|");
         Scanner scanner = new Scanner(System.in);
-        boolean playing = true;
-        while (playing){
+        while (true){
             System.out.println("|-------------------------------------------|");
             displayGrid();
             System.out.println("|-------------------------------------------|");
@@ -89,7 +86,6 @@ public class Main {
             int input = scanner.nextInt();
 
             if(input == -1){
-                playing = false;
                 break;
             }else{
                 Block blockToBePlaced = game.getBlocksToBeUsed().get(input);
@@ -101,7 +97,7 @@ public class Main {
                 int x = scanner.nextInt();
 
                 try {
-                    game.placeBlock(blockToBePlaced, y, x);
+                    game.placeBlock(blockToBePlaced, x, y);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
