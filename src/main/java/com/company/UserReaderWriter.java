@@ -6,6 +6,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserReaderWriter {
     private List<User> users;
@@ -17,10 +18,20 @@ public class UserReaderWriter {
     public UserReaderWriter() {
         ObjectMapper mapper = new ObjectMapper();
         try{
-            users = mapper.readValue(new File("highscores.json"), new TypeReference<List<User>>(){});
-        } catch (IOException e) {
-            e.printStackTrace();
+
+            File file = new File("highscores.json");
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String fileContent = br.lines().collect(Collectors.joining());
+            users = mapper.readValue(fileContent, new TypeReference<List<User>>(){});
+        } catch (FileNotFoundException fileNotFoundException) {
+            fileNotFoundException.printStackTrace();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
         }
+
+
+
+
     }
 
     public User register(String username, String password) throws Exception{
@@ -53,8 +64,11 @@ public class UserReaderWriter {
     }
     public void save(){
         ObjectMapper mapper = new ObjectMapper();
-        try {
-            mapper.writeValue(new File("highscores.json"), users);
+        try (FileWriter writer = new FileWriter("highscores.json");
+             BufferedWriter bw = new BufferedWriter(writer)) {
+            String fileContentToWrite = mapper.writeValueAsString(users);
+            bw.write(fileContentToWrite);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

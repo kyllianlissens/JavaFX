@@ -113,12 +113,6 @@ public class Main {
         }
         clearConsole();
 
-
-
-
-
-        //Simple 2D iteration to view which tiles have a white rectangle or not
-
     }
 
 
