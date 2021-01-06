@@ -32,21 +32,32 @@ public class Gameboard {
         this(5,5); //default size
     }
 
-    public boolean placeBlock(Block block, Point point){
+    public boolean placeBlock(Block block, Point point) throws Exception {
         for (Point p : block.getShape().getTiles()) {
             Point calcPoint = new Point(point.x + p.x, point.y + p.y);
             System.out.println("Shape Point: " + p.toString());
             System.out.println("Point location: " + point.toString());
             System.out.println("Calculated location: " + calcPoint.toString());
-            Rectangle gridPoint = pointGrid.get(calcPoint.y).get(calcPoint.x);
+            Rectangle gridPoint = null;
+            try{
+                gridPoint = pointGrid.get(calcPoint.y).get(calcPoint.x);
+            }catch (IndexOutOfBoundsException exception){
+                throw new Exception("Invalid locations!");
+            }
+
+
             if (gridPoint.getColor() == Color.WHITE){
                 return false; //WHITE = Block already has been placed there.
             }
             gridPoint.setColor(Color.WHITE);
         }
+
         return true;
 
     }
+
+
+
 
     public ArrayList<ArrayList<Rectangle>> getPointGrid() {
         return pointGrid;

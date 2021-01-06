@@ -1,6 +1,8 @@
 package com.company;
 
 import java.awt.*;
+import java.io.IOException;
+import java.nio.file.LinkOption;
 import java.util.Scanner;
 
 
@@ -22,7 +24,7 @@ public class Main {
         System.out.println("|-----------------------------------|");
         System.out.print("Choice: ");
         int choice = scanner.nextInt();
-
+        clearConsole();
         switch (choice){
             case 1:
                 System.out.print("Username: ");
@@ -52,13 +54,12 @@ public class Main {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
+                break;
 
             case 3:
                 for (User user : game.getUserSortedByHighscore()){
                     System.out.println(user.toString());
                 }
-
                 break;
 
         }
@@ -68,26 +69,67 @@ public class Main {
 
     }
     public static void playGame(){
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+        clearConsole();
 
         System.out.println("|-------------------------------------------|");
         System.out.println(" Welcome, " + game.getUser().getUsername() + "! ");
         System.out.println(" Current highscore: " + game.getUser().getHighscore());
         System.out.println("|-------------------------------------------|");
         Scanner scanner = new Scanner(System.in);
-        boolean alive = true;
-        while (alive){
+        boolean playing = true;
+        while (playing){
+            System.out.println("|-------------------------------------------|");
+            displayGrid();
+            System.out.println("|-------------------------------------------|");
+            System.out.println("Choose block to place! or type -1 to stop playing");
+            for (int i = 0; i < game.getBlocksToBeUsed().size(); i++) {
+                System.out.println( i + ". " + game.getBlocksToBeUsed().get(i).getShape().name());
+            }
+
+            int input = scanner.nextInt();
+
+            if(input == -1){
+                playing = false;
+                break;
+            }else{
+                Block blockToBePlaced = game.getBlocksToBeUsed().get(input);
+
+                System.out.print("Y coordinate: ");
+                int y = scanner.nextInt();
+
+                System.out.print("X coordinate: ");
+                int x = scanner.nextInt();
+
+                try {
+                    game.placeBlock(blockToBePlaced, y, x);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
 
 
 
         }
+        clearConsole();
 
 
-        System.out.println(game.getGameBoard().placeBlock(game.getBlocksToBeUsed().get(0), new Point(2,2)));//ugly 2 block placement
-        System.out.println(game.getGameBoard().placeBlock(game.getBlocksToBeUsed().get(1), new Point(2,2)));//this one should fail
+
+
 
         //Simple 2D iteration to view which tiles have a white rectangle or not
+
+    }
+
+
+    public static void clearConsole(){
+        //Tried 10 different methods, nothing worked :(
+        for (int i = 0; i < 50; i++) {
+            System.out.println();
+        }
+    }
+
+    public static void displayGrid(){
         for (int y = 0; y < 5; y++) {
             for (int x = 0; x < 5; x++) {
                 System.out.print(game.getGameBoard().getPointGrid().get(y).get(x).getColor().equals(Color.white) ? 1 + " ": 0 + " ");

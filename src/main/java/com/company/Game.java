@@ -1,5 +1,6 @@
 package com.company;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -18,6 +19,17 @@ public class Game {
         userReaderWriter = new UserReaderWriter();
     }
 
+
+    public void placeBlock(Block block, int x, int y) throws Exception {
+        if (gameBoard.placeBlock(block, new Point(x, y))){
+            blocksToBeUsed.remove(block);
+            if (blocksToBeUsed.size() == 0){
+                generateNewBlocks();
+            }
+        }else{
+            throw new Exception("Can't place block here");
+        }
+    }
 
 
     public void generateNewBlocks(){

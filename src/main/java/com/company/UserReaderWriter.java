@@ -48,7 +48,7 @@ public class UserReaderWriter {
                 }
             }
         }
-       throw new Exception("User " + username + " non exsisting!");
+       throw new Exception("User " + username + " non existing!");
 
     }
     public void save(){
