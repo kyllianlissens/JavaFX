@@ -21,8 +21,7 @@ public class UserReaderWriter {
 
             File file = new File("highscores.json");
             BufferedReader br = new BufferedReader(new FileReader(file));
-            String fileContent = br.lines().collect(Collectors.joining());
-            users = mapper.readValue(fileContent, new TypeReference<List<User>>(){});
+            users = mapper.readValue(br.lines().collect(Collectors.joining()), new TypeReference<List<User>>(){});
         } catch (IOException fileNotFoundException) {
             fileNotFoundException.printStackTrace();
         }
@@ -62,9 +61,7 @@ public class UserReaderWriter {
         ObjectMapper mapper = new ObjectMapper();
         try (FileWriter writer = new FileWriter("highscores.json");
              BufferedWriter bw = new BufferedWriter(writer)) {
-            String fileContentToWrite = mapper.writeValueAsString(users);
-            bw.write(fileContentToWrite);
-
+             bw.write(mapper.writeValueAsString(users));
         } catch (IOException e) {
             e.printStackTrace();
         }

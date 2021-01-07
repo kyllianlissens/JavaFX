@@ -32,7 +32,7 @@ public class Gameboard {
         this(5,5); //default size
     }
 
-    public boolean placeBlock(Block block, Point point) throws Exception {
+    public boolean placeBlock(Block block, Point point){
         for (Point p : block.getShape().getTiles()) {
             Point calcPoint = new Point(point.x + p.x, point.y + p.y);
             System.out.println("Shape Point: " + p.toString());
@@ -42,7 +42,7 @@ public class Gameboard {
             try{
                 gridPoint = pointGrid.get(calcPoint.y).get(calcPoint.x);
             }catch (IndexOutOfBoundsException exception){
-                throw new Exception("Invalid locations!");
+                return false;
             }
 
 

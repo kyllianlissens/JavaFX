@@ -12,6 +12,9 @@ Java FX project 2020
 - [ ] User logic
 - [ ] Score logic based on BlockShape difficulty
 
+- [ ] Detecten of blocks niet meer placed kunnen worden !!!!!!!!!!!!!!!!!!!!!!!!!
+
+
 ## Logs:
 ###28/12:
 - Meeste van block placement klaar
