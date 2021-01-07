@@ -13,6 +13,7 @@ Java FX project 2020
 - [ ] Score logic based on BlockShape difficulty
 
 - [ ] Detecten of blocks niet meer placed kunnen worden !!!!!!!!!!!!!!!!!!!!!!!!!
+- [ ] Highscore shit !!!!!!!!!!!!!
 
 
 ## Logs:
