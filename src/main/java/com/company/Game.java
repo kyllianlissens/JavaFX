@@ -11,12 +11,14 @@ public class Game {
     private List<Block> blocksToBeUsed;
     private final UserReaderWriter userReaderWriter;
     private User user;
+    public int score;
 
     public Game () {
         gameBoard = new Gameboard();
         blocksToBeUsed = new ArrayList<>();
         generateNewBlocks();
         userReaderWriter = new UserReaderWriter();
+        score = 0;
     }
 
 
@@ -29,7 +31,44 @@ public class Game {
         }else{
             throw new Exception("Can't place block here");
         }
+        /*
+        0   1   2   3   4   5
+        1   1   2   3   4   5
+        2   1   2   3   4   5
+        3   1   2   3   4   5
+        4   1   2   3   4   5
+        5   1   2   3   4   5
+        */
+        //horizontaal
+        for(int i = 0; i < gameBoard.getPointGrid().size();i++){
+            if(gameBoard.getPointGrid().get(i).stream().allMatch(e->e.getColor().equals(Color.white))){
+                score += 10;
+                gameBoard.getPointGrid().get(i).forEach(e->e.setColor(Color.black));
+            }
+
+        }
+        //verticaal
+        for (int i = 0; i < gameBoard.getPointGrid().size(); i++) {
+            if(gameBoard.getPointGrid().get(i).stream().allMatch(e->e.getColor().equals(Color.white))){
+                score += 10;
+                gameBoard.getPointGrid().get(i).forEach(e->e.setColor(Color.black));
+            }
+
+            //verticaal check?
+            for (int j = 0; j < gameBoard.getPointGrid().get(i).size(); j++) {
+                int finalJ = j;
+                if(gameBoard.getPointGrid().stream().allMatch(e-> e.get(finalJ).getColor().equals(Color.white))){
+                    score += 10;
+                    gameBoard.getPointGrid().get(i).forEach(e->e.setColor(Color.black));
+                    gameBoard.getPointGrid().stream().forEach(e-> e.get(finalJ).setColor(Color.black));
+                }
+
+            }
+        }
+
+
     }
+
 
 
     public void generateNewBlocks(){
@@ -67,4 +106,5 @@ public class Game {
     public User getUser() {
         return user;
     }
+
 }
