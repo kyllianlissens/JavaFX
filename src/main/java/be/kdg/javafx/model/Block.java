@@ -1,8 +1,6 @@
-package com.company;
+package be.kdg.javafx.model;
 
 import java.awt.*;
-import java.util.*;
-import java.util.List;
 
 public class Block {
 
