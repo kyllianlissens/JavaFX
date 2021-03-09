@@ -1,9 +1,1 @@
-/target/classes/com/company/Block.class
-/target/classes/com/company/BlockShape.class
-/target/classes/com/company/Game.class
-/target/classes/com/company/Gameboard.class
-/target/classes/com/company/Main.class
-/target/classes/com/company/Rectangle.class
-/target/classes/com/company/User.class
-/target/classes/com/company/UserReaderWriter$1.class
-/target/classes/com/company/UserReaderWriter.class
+*.class

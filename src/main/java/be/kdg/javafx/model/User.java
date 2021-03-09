@@ -1,4 +1,4 @@
-package com.company;
+package be.kdg.javafx.model;
 
 
 public class User {

@@ -1,4 +1,4 @@
-package com.company;
+package be.kdg.javafx.model;
 
 
 import java.awt.*;
@@ -16,4 +16,6 @@ public class Rectangle { //This class will soon be replaced with JavaFX classes 
         this.color = color;
     }
     public Color getColor() { return color; }
+
+
 }
