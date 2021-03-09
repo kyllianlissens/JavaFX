@@ -1,6 +1,6 @@
 package be.kdg.javafx;
 
-import be.kdg.javafx.model.JavaFXModel;
+import be.kdg.javafx.model.Game;
 import be.kdg.javafx.view.login.LoginPresenter;
 import be.kdg.javafx.view.login.LoginView;
 import javafx.application.Application;
@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
-        JavaFXModel model = new JavaFXModel();
+        Game model = new Game();
         LoginView loginView = new LoginView();
         new LoginPresenter(model, loginView);
         primaryStage.setScene(new Scene(loginView));

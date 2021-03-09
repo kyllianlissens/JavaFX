@@ -1,12 +1,12 @@
 package be.kdg.javafx.view;
 
-import be.kdg.javafx.model.JavaFXModel;
+import be.kdg.javafx.model.Game;
 
 public class JavaFXPresenter {
-    private JavaFXModel model;
+    private Game model;
     private JavaFXView view;
 
-    public JavaFXPresenter(JavaFXModel model, JavaFXView view) {
+    public JavaFXPresenter(Game model, JavaFXView view) {
         this.model = model;
         this.view = view;
         addEventHandlers();

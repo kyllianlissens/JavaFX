@@ -1,15 +1,15 @@
 package be.kdg.javafx.view.login;
 
-import be.kdg.javafx.model.JavaFXModel;
+import be.kdg.javafx.model.Game;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 
 public class LoginPresenter {
-    private JavaFXModel model;
+    private Game model;
     private LoginView view;
 
-    public LoginPresenter(JavaFXModel model, LoginView view) {
+    public LoginPresenter(Game model, LoginView view) {
         this.model = model;
         this.view = view;
         addEventHandlers();
@@ -22,7 +22,11 @@ public class LoginPresenter {
 
                     @Override
                     public void handle(ActionEvent actionEvent) {
-                        showAlert(Alert.AlertType.INFORMATION, "Login!", "Yes very epic");
+                        try {
+                            model.login(view.getUsernameTextField().getText(), view.getPasswordTextField().getText());
+                        } catch (Exception exception) {
+                            showAlert(Alert.AlertType.ERROR, exception.getMessage(), exception.getMessage());
+                        }
                     }
                 }
         );
@@ -32,7 +36,11 @@ public class LoginPresenter {
 
                     @Override
                     public void handle(ActionEvent actionEvent) {
-
+                        try {
+                            model.register(view.getUsernameTextField().getText(), view.getPasswordTextField().getText());
+                        } catch (Exception exception) {
+                            showAlert(Alert.AlertType.ERROR, exception.getMessage(), exception.getMessage());
+                        }
                     }
                 }
         );

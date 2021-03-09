@@ -6,6 +6,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.*;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class UserReaderWriter {
@@ -18,8 +19,9 @@ public class UserReaderWriter {
     public UserReaderWriter() {
         ObjectMapper mapper = new ObjectMapper();
         try{
+            ClassLoader classLoader = getClass().getClassLoader();
+            File file = new File(Objects.requireNonNull(classLoader.getResource("highscores.json")).getFile());
 
-            File file = new File("highscores.json");
             BufferedReader br = new BufferedReader(new FileReader(file));
             users = mapper.readValue(br.lines().collect(Collectors.joining()), new TypeReference<List<User>>(){});
         } catch (IOException fileNotFoundException) {
