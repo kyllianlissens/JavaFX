@@ -1,14 +1,27 @@
 package be.kdg.javafx.view.game;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 
-public class GameView extends BorderPane {
+public class GameView extends GridPane {
+
+
+
+    private Button highscoresButton;
+    private Button settingsButton;
+
 
     public GameView(){
         initialiseNodes();
         layoutNodes();
     }
     private void initialiseNodes() {
+
+        this.highscoresButton = new Button("Highscores");
+        this.settingsButton = new Button("Settings");
         // Initialisatie van de Nodes
         // bvb.:
         // button = new Button("...")
@@ -16,8 +29,23 @@ public class GameView extends BorderPane {
     }
 
     private void layoutNodes() {
-        // Layoutvan de Nodes
-        // add... methodes (of set...)
-        // Insets, padding, alignment, ...
+
+        this.setAlignment(Pos.CENTER);
+        this.setHgap(10);
+        this.setVgap(10);
+        this.setPadding(new Insets(100, 100, 100, 100));
+
+
+
+        this.add(highscoresButton, 0,1);
+        this.add(settingsButton, 1,1);
+    }
+
+    public Button getHighscoresButton() {
+        return highscoresButton;
+    }
+
+    public Button getSettingsButton() {
+        return settingsButton;
     }
 }

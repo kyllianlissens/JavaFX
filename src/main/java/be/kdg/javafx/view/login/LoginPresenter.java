@@ -1,6 +1,8 @@
 package be.kdg.javafx.view.login;
 
 import be.kdg.javafx.model.Game;
+import be.kdg.javafx.view.game.GamePresenter;
+import be.kdg.javafx.view.game.GameView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
@@ -24,6 +26,13 @@ public class LoginPresenter {
                     public void handle(ActionEvent actionEvent) {
                         try {
                             model.login(view.getUsernameTextField().getText(), view.getPasswordTextField().getText());
+
+                            GameView gameView = new GameView();
+                            GamePresenter gamePresenter = new GamePresenter(model, gameView);
+                            view.getScene().setRoot(gameView);
+                            gameView.getScene().getWindow().sizeToScene();
+
+
                         } catch (Exception exception) {
                             showAlert(Alert.AlertType.ERROR, exception.getMessage(), exception.getMessage());
                         }

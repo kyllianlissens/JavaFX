@@ -79,12 +79,12 @@ public class Game {
         }
     }
 
-    public User login(String username, String wachtwoord) throws Exception {
-        return user = userReaderWriter.login(username, wachtwoord);
+    public void login(String username, String wachtwoord) throws Exception {
+        this.user = userReaderWriter.login(username, wachtwoord);
     }
 
-    public User register(String username, String wachtwoord) throws Exception{
-        return user = userReaderWriter.register(username, wachtwoord);
+    public void register(String username, String wachtwoord) throws Exception{
+        this.user = userReaderWriter.register(username, wachtwoord);
     }
 
     public void save(){

@@ -1,13 +1,19 @@
 package be.kdg.javafx.view.game;
 
-import be.kdg.javafx.model.JavaFXModel;
+
+import be.kdg.javafx.model.Game;
 import be.kdg.javafx.view.JavaFXView;
+import be.kdg.javafx.view.highscores.HighscorePresenter;
+import be.kdg.javafx.view.highscores.HighscoreView;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
 
 public class GamePresenter {
-    private JavaFXModel model;
-    private JavaFXView view;
+    private Game model;
+    private GameView view;
 
-    public GamePresenter(JavaFXModel model, JavaFXView view) {
+    public GamePresenter(Game model, GameView view) {
         this.model = model;
         this.view = view;
         addEventHandlers();
@@ -15,10 +21,14 @@ public class GamePresenter {
     }
 
     private void addEventHandlers() {
-        // Koppelt event handlers(anon. innerklassen)
-        // aan de controlsuit de view.
-        // Event handlers: roepen methodes aan uit het
-        // model en zorgen voor een update van de view.
+        view.getHighscoresButton().setOnAction(
+                actionEvent -> {
+                    HighscoreView highscoresView = new HighscoreView();
+                    HighscorePresenter highscoresPresenter = new HighscorePresenter(model, highscoresView);
+                    view.getScene().setRoot(highscoresView);
+                    highscoresView.getScene().getWindow().sizeToScene();
+                }
+        );
     }
 
     private void updateView() {
