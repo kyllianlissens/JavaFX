@@ -78,4 +78,12 @@ public class LoginView extends GridPane {
     Button getRegisterButton() {
         return registerButton;
     }
+
+    public TextField getUsernameTextField() {
+        return usernameTextField;
+    }
+
+    public PasswordField getPasswordTextField() {
+        return passwordTextField;
+    }
 }
