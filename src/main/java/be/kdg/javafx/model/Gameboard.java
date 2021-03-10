@@ -21,7 +21,7 @@ public class Gameboard {
 
         pointGrid = new ArrayList<>();
         for (int y = 0; y < sizeY; y++) { //2D Array creation & initialization
-            pointGrid.add(new ArrayList<>());
+            pointGrid.add(new ArrayList<>());//e
             for (int x = 0; x < sizeX; x++) {
                 pointGrid.get(y).add(new Rectangle(Color.BLACK,10,10));
             }
