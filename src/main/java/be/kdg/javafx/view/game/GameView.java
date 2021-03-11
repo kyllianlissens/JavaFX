@@ -22,7 +22,8 @@ public class GameView extends GridPane {
 
         this.highscoresButton = new Button("Highscores");
         this.settingsButton = new Button("Settings");
-        // Initialisatie van de Nodes
+        GridPane gameBoard = new GridPane();
+        gameBoard.setPrefSize(755, 755);
         // bvb.:
         // button = new Button("...")
         // label = new Label("...")
