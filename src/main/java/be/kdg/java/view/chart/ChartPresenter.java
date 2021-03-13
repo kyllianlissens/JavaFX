@@ -21,11 +21,9 @@ public class ChartPresenter {
 
     private void updateView() {
         XYChart.Series dataSeries1 = new XYChart.Series();
-
         for (User user : model.getUserSortedByHighscore()){
             dataSeries1.getData().add(new XYChart.Data(user.getUsername(), user.getHighscore()));
         }
-
         this.view.getBarChart().getData().add(dataSeries1);
     }
 }

@@ -14,10 +14,8 @@ public class ChartView extends BorderPane {
     }
     private void initialiseNodes() {
 
-
         CategoryAxis xAxis = new CategoryAxis();
         xAxis.setLabel("Players");
-
         NumberAxis yAxis = new NumberAxis();
         yAxis.setLabel("Highscore");
 
