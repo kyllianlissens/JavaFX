@@ -1,4 +1,4 @@
-package be.kdg.javafx.model;
+package be.kdg.java.model;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

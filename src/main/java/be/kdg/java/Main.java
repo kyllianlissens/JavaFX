@@ -1,8 +1,8 @@
-package be.kdg.javafx;
+package be.kdg.java;
 
-import be.kdg.javafx.model.Game;
-import be.kdg.javafx.view.login.LoginPresenter;
-import be.kdg.javafx.view.login.LoginView;
+import be.kdg.java.model.Game;
+import be.kdg.java.view.login.LoginPresenter;
+import be.kdg.java.view.login.LoginView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

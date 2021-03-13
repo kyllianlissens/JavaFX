@@ -1,10 +1,10 @@
-package be.kdg.javafx.view;
+package be.kdg.java.view.settings;
 
 import javafx.scene.layout.BorderPane;
 
-public class JavaFXView extends BorderPane {
+public class SettingsView extends BorderPane {
 
-    public JavaFXView(){
+    public SettingsView(){
         initialiseNodes();
         layoutNodes();
     }

@@ -1,12 +1,13 @@
-package be.kdg.javafx.view;
+package be.kdg.java.view.settings;
 
-import be.kdg.javafx.model.Game;
+import be.kdg.java.model.Game;
 
-public class JavaFXPresenter {
+
+public class SettingsPresenter {
     private Game model;
-    private JavaFXView view;
+    private SettingsView view;
 
-    public JavaFXPresenter(Game model, JavaFXView view) {
+    public SettingsPresenter(Game model, SettingsView view) {
         this.model = model;
         this.view = view;
         addEventHandlers();

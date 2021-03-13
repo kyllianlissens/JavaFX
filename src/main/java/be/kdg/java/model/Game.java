@@ -1,4 +1,4 @@
-package be.kdg.javafx.model;
+package be.kdg.java.model;
 
 import java.awt.*;
 import java.util.ArrayList;

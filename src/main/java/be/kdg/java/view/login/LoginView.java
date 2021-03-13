@@ -1,4 +1,4 @@
-package be.kdg.javafx.view.login;
+package be.kdg.java.view.login;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

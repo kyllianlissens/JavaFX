@@ -1,12 +1,11 @@
-package be.kdg.javafx.view.highscores;
+package be.kdg.java.view.highscores;
 
-import be.kdg.javafx.model.Game;
-import be.kdg.javafx.model.User;
-import be.kdg.javafx.view.game.GamePresenter;
-import be.kdg.javafx.view.game.GameView;
-import be.kdg.javafx.view.login.LoginView;
+import be.kdg.java.model.Game;
+import be.kdg.java.view.chart.ChartPresenter;
+import be.kdg.java.view.chart.ChartView;
+import be.kdg.java.view.game.GamePresenter;
+import be.kdg.java.view.game.GameView;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
@@ -32,6 +31,19 @@ public class HighscorePresenter {
                         GamePresenter gamePresenter = new GamePresenter(model, gameView);
                         view.getScene().setRoot(gameView);
                         gameView.getScene().getWindow().sizeToScene();
+                    }
+                }
+        );
+
+        view.getStatsButton().setOnAction(
+                new EventHandler<ActionEvent>() {
+
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        ChartView chartView = new ChartView();
+                        ChartPresenter chartPresenter = new ChartPresenter(model, chartView);
+                        view.getScene().setRoot(chartView);
+                        chartView.getScene().getWindow().sizeToScene();
                     }
                 }
         );

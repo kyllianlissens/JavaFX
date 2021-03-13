@@ -1,4 +1,4 @@
-package be.kdg.javafx.model;
+package be.kdg.java.model;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ public class Gameboard {
         for (int y = 0; y < sizeY; y++) { //2D Array creation & initialization
             pointGrid.add(new ArrayList<>());//e
             for (int x = 0; x < sizeX; x++) {
-                pointGrid.get(y).add(new Rectangle(Color.BLACK,10,10));
+                pointGrid.get(y).add(new be.kdg.java.model.Rectangle(Color.BLACK,10,10));
             }
         }
     }

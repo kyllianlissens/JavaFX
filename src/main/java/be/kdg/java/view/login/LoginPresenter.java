@@ -1,8 +1,8 @@
-package be.kdg.javafx.view.login;
+package be.kdg.java.view.login;
 
-import be.kdg.javafx.model.Game;
-import be.kdg.javafx.view.game.GamePresenter;
-import be.kdg.javafx.view.game.GameView;
+import be.kdg.java.model.Game;
+import be.kdg.java.view.game.GamePresenter;
+import be.kdg.java.view.game.GameView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;

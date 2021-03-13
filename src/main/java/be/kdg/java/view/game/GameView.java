@@ -1,9 +1,8 @@
-package be.kdg.javafx.view.game;
+package be.kdg.java.view.game;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 public class GameView extends GridPane {

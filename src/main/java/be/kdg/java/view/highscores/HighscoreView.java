@@ -1,10 +1,9 @@
-package be.kdg.javafx.view.highscores;
+package be.kdg.java.view.highscores;
 
-import be.kdg.javafx.model.User;
+import be.kdg.java.model.User;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
