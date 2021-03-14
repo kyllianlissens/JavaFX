@@ -40,6 +40,10 @@ public class GamePresenter {
     }
 
     private void updateView() {
+        //GridPane.setRowIndex(tile, i);
+        //GridPane.setColumnIndex(tile, j);
+        //gameBoard.getChildren().addAll(tile, text);
+        //tile.setOnMouseClicked(event -> drawMove(text));
 
     }
 }

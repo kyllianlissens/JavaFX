@@ -1,13 +1,20 @@
 package be.kdg.java.view.chart;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 
-public class ChartView extends BorderPane {
+public class ChartView extends BorderPane  {
 
     private BarChart barChart;
+    private Button backButton;
+    private HBox buttonHBox;
+
     public ChartView() {
         this.initialiseNodes();
         this.layoutNodes();
@@ -20,13 +27,24 @@ public class ChartView extends BorderPane {
         yAxis.setLabel("Highscore");
 
         this.barChart = new BarChart(xAxis, yAxis);
+
+        this.buttonHBox = new HBox(10);
+        this.backButton = new Button("Back");
     }
 
     private void layoutNodes() {
+        this.setPadding(new Insets(25, 25, 25,25));
         this.setCenter(barChart);
+
+        this.buttonHBox.setAlignment(Pos.CENTER);
+        this.buttonHBox.getChildren().addAll(this.backButton);
+       this.setBottom(buttonHBox);
 
     }
 
+    public Button getBackButton() {
+        return backButton;
+    }
     public BarChart getBarChart() {
         return barChart;
     }

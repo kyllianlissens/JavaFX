@@ -15,6 +15,7 @@ public class Main extends Application {
         new LoginPresenter(model, loginView);
         primaryStage.setScene(new Scene(loginView));
         primaryStage.show();
+
     }
 
     public static void main(String[] args) {

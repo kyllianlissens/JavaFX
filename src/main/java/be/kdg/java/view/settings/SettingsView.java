@@ -2,6 +2,7 @@ package be.kdg.java.view.settings;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -21,6 +22,8 @@ public class SettingsView extends GridPane {
     private Text rowText;
     private TextField rowInput;
 
+    private Button backButton;
+    private HBox buttonHBox;
 
     public SettingsView(){
         initialiseNodes();
@@ -31,9 +34,17 @@ public class SettingsView extends GridPane {
         this.soundText = new Text("Sound");
         this.soundCheckBox = new CheckBox();
 
+
+
+
         this.rowSettings = new HBox(75);
         this.rowText = new Text("Rows");
         this.rowInput = new TextField("Rows");
+
+        this.buttonHBox = new HBox(75);
+        this.backButton = new Button("Back");
+
+
     }
 
     private void layoutNodes() {
@@ -54,5 +65,14 @@ public class SettingsView extends GridPane {
 
         this.add(rowSettings, 1,2);
 
+        this.buttonHBox.setAlignment(Pos.CENTER);
+        this.buttonHBox.getChildren().addAll(this.backButton);
+        this.add(buttonHBox, 3, 3);
+
+
+
+    }
+    public Button getBackButton() {
+        return backButton;
     }
 }

@@ -2,6 +2,10 @@ package be.kdg.java.view.chart;
 
 import be.kdg.java.model.Game;
 import be.kdg.java.model.User;
+import be.kdg.java.view.game.GamePresenter;
+import be.kdg.java.view.game.GameView;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.chart.XYChart;
 
 public class ChartPresenter {
@@ -16,7 +20,18 @@ public class ChartPresenter {
     }
 
     private void addEventHandlers() {
+        view.getBackButton().setOnAction(
+                new EventHandler<ActionEvent>() {
 
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        GameView gameView = new GameView();
+                        GamePresenter gamePresenter = new GamePresenter(model, gameView);
+                        view.getScene().setRoot(gameView);
+                        gameView.getScene().getWindow().sizeToScene();
+                    }
+                }
+        );
     }
 
     private void updateView() {

@@ -2,10 +2,14 @@ package be.kdg.java.view.login;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
@@ -13,6 +17,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class LoginView extends GridPane {
+
+    private GridPane grid;
     private Label usernameLabel;
     private TextField usernameTextField;
 
@@ -25,6 +31,8 @@ public class LoginView extends GridPane {
     private Button registerButton;
 
     private Text welcomeTitle;
+
+
 
     public LoginView() {
         this.initialiseNodes();
@@ -40,19 +48,19 @@ public class LoginView extends GridPane {
         this.buttonHBox = new HBox(10);
 
         this.loginButton = new Button("Sign in");
+
         this.registerButton = new Button("Register");
 
         this.welcomeTitle = new Text("Welcome!");
     }
 
     private void layoutNodes() {
+
         this.setAlignment(Pos.CENTER);
         this.setHgap(10);
         this.setVgap(10);
         this.setPadding(new Insets(50, 50, 50, 50));
 
-
-        this.welcomeTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 
         this.add(welcomeTitle, 0,0,2,1);
 
@@ -67,6 +75,14 @@ public class LoginView extends GridPane {
         this.buttonHBox.getChildren().addAll(this.registerButton, this.loginButton);
 
         this.add(buttonHBox, 1,4);
+        //hier komt alle styling
+        setStyle("-fx-background-image: url(images/woodenbackground.jpg)");
+        this.welcomeTitle.setStyle("-fx-font-size: 20px;fx-font-weight: 900;-fx-background-color: gray;");
+        this.usernameLabel.setStyle("-fx-font-size:18px; fx-font-weight: 900 ;");
+        this.passwordLabel.setStyle("-fx-font-size:18px; fx-font-weight: 900 ;");
+        this.loginButton.setStyle("-fx-color: gray;-fx-font-size: 14px;");
+        this.registerButton.setStyle("-fx-color: black;-fx-font-size: 14px;");
+
 
 
     }

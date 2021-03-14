@@ -1,6 +1,12 @@
 package be.kdg.java.view.settings;
 
 import be.kdg.java.model.Game;
+import be.kdg.java.view.chart.ChartPresenter;
+import be.kdg.java.view.chart.ChartView;
+import be.kdg.java.view.game.GamePresenter;
+import be.kdg.java.view.game.GameView;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 
 public class SettingsPresenter {
@@ -15,10 +21,18 @@ public class SettingsPresenter {
     }
 
     private void addEventHandlers() {
-        // Koppelt event handlers(anon. innerklassen)
-        // aan de controlsuit de view.
-        // Event handlers: roepen methodes aan uit het
-        // model en zorgen voor een update van de view.
+        view.getBackButton().setOnAction(
+                new EventHandler<ActionEvent>() {
+
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        GameView gameView = new GameView();
+                        GamePresenter gamePresenter = new GamePresenter(model, gameView);
+                        view.getScene().setRoot(gameView);
+                        gameView.getScene().getWindow().sizeToScene();
+                    }
+                }
+        );
     }
 
     private void updateView() {

@@ -15,6 +15,7 @@ public class HighscoreView extends VBox {
 
     private Text title;
     private ListView<User> highscores;
+
     private HBox buttonHBox;
 
     private Button backButton;

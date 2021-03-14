@@ -4,6 +4,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.HBox;
+
 
 public class GameView extends GridPane {
 
@@ -11,8 +14,8 @@ public class GameView extends GridPane {
 
     private Button highscoresButton;
     private Button settingsButton;
-
-
+    private GridPane gameBoard;
+    private HBox hbox;
     public GameView(){
         initialiseNodes();
         layoutNodes();
@@ -21,11 +24,9 @@ public class GameView extends GridPane {
 
         this.highscoresButton = new Button("Highscores");
         this.settingsButton = new Button("Settings");
-        GridPane gameBoard = new GridPane();
-        gameBoard.setPrefSize(755, 755);
-        // bvb.:
-        // button = new Button("...")
-        // label = new Label("...")
+        this.gameBoard = new GridPane();
+
+
     }
 
     private void layoutNodes() {
@@ -35,6 +36,7 @@ public class GameView extends GridPane {
         this.setVgap(10);
         this.setPadding(new Insets(100, 100, 100, 100));
 
+        gameBoard.setPrefSize(755, 755);
 
 
         this.add(highscoresButton, 0,1);

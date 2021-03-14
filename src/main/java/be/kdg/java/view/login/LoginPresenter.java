@@ -6,6 +6,7 @@ import be.kdg.java.view.game.GameView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
+import javafx.scene.paint.Color;
 
 public class LoginPresenter {
     private Game model;
