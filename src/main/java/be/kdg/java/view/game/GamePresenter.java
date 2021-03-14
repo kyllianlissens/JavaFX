@@ -4,6 +4,8 @@ package be.kdg.java.view.game;
 import be.kdg.java.model.Game;
 import be.kdg.java.view.highscores.HighscorePresenter;
 import be.kdg.java.view.highscores.HighscoreView;
+import be.kdg.java.view.settings.SettingsPresenter;
+import be.kdg.java.view.settings.SettingsView;
 
 
 public class GamePresenter {
@@ -24,6 +26,15 @@ public class GamePresenter {
                     HighscorePresenter highscoresPresenter = new HighscorePresenter(model, highscoresView);
                     view.getScene().setRoot(highscoresView);
                     highscoresView.getScene().getWindow().sizeToScene();
+                }
+        );
+
+        view.getSettingsButton().setOnAction(
+                actionEvent -> {
+                    SettingsView settingsView = new SettingsView();
+                    SettingsPresenter settingsPresenter = new SettingsPresenter(model, settingsView);
+                    view.getScene().setRoot(settingsView);
+                    settingsView.getScene().getWindow().sizeToScene();
                 }
         );
     }
