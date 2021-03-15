@@ -29,7 +29,7 @@ public class Gameboard {
     }
 
     public Gameboard(){
-        this(5,5); //default size
+        this(12,12); //default size
     }
 
     public boolean placeBlock(Block block, Point point){

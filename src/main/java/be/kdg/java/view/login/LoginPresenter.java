@@ -35,6 +35,7 @@ public class LoginPresenter {
 
 
                         } catch (Exception exception) {
+                            exception.printStackTrace();
                             showAlert(Alert.AlertType.ERROR, exception.getMessage(), exception.getMessage());
                         }
                     }
