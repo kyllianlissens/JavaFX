@@ -9,8 +9,8 @@ import javafx.event.EventHandler;
 import javafx.scene.chart.XYChart;
 
 public class ChartPresenter {
-    private Game model;
-    private ChartView view;
+    private final Game model;
+    private final ChartView view;
 
     public ChartPresenter(Game model, ChartView view) {
         this.model = model;

@@ -1,6 +1,7 @@
 package be.kdg.java.model;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Gameboard {
@@ -10,12 +11,15 @@ public class Gameboard {
 
 
      */
-    private ArrayList<ArrayList<Rectangle>> pointGrid;
-
+    private final ArrayList<ArrayList<Rectangle>> pointGrid;
+    static private List<Block> placedBlocks;
     private final int sizeX;
     private final int sizeY;
 
     public Gameboard(int sizeX, int sizeY){
+
+        placedBlocks = new ArrayList<>();
+
         this.sizeX = sizeX;
         this.sizeY = sizeY;
 
@@ -23,7 +27,7 @@ public class Gameboard {
         for (int y = 0; y < sizeY; y++) { //2D Array creation & initialization
             pointGrid.add(new ArrayList<>());//e
             for (int x = 0; x < sizeX; x++) {
-                pointGrid.get(y).add(new be.kdg.java.model.Rectangle(Color.BLACK,10,10));
+                pointGrid.get(y).add(new be.kdg.java.model.Rectangle(Color.WHITE));
             }
         }
     }
@@ -33,25 +37,48 @@ public class Gameboard {
     }
 
     public boolean placeBlock(Block block, Point point){
+        System.out.println("Test= " + point);
+
+
+        //We check all the points first
         for (Point p : block.getShape().getTiles()) {
+
+            Point calcPoint = new Point(point.x + p.x, point.y + p.y);
+            Rectangle gridPoint;
+            try{
+                gridPoint = pointGrid.get(calcPoint.y-2).get(calcPoint.x-2);
+            }catch (IndexOutOfBoundsException exception){
+                System.out.println("Out of index: " + point);
+                return false;
+            }
+
+            if (gridPoint.getColor() == Color.BLACK){
+                System.out.println("Block placed: " + point);
+                return false; //WHITE = Block already has been placed there.
+            }
+
+
+        }
+
+
+        for (Point p : block.getShape().getTiles()) {
+
+
+
             Point calcPoint = new Point(point.x + p.x, point.y + p.y);
             System.out.println("Shape Point: " + p.toString());
             System.out.println("Point location: " + point.toString());
             System.out.println("Calculated location: " + calcPoint.toString());
-            Rectangle gridPoint = null;
-            try{
-                gridPoint = pointGrid.get(calcPoint.y).get(calcPoint.x);
-            }catch (IndexOutOfBoundsException exception){
-                return false;
-            }
+            Rectangle gridPoint =  pointGrid.get(calcPoint.y-2).get(calcPoint.x-2);
+
+            gridPoint.setColor(Color.BLACK);
 
 
-            if (gridPoint.getColor() == Color.WHITE){
-                return false; //WHITE = Block already has been placed there.
-            }
-            gridPoint.setColor(Color.WHITE);
         }
 
+
+        block.setLocation(point);
+        placedBlocks.add(block);
         return true;
 
     }
@@ -69,5 +96,9 @@ public class Gameboard {
 
     public int getSizeY() {
         return sizeY;
+    }
+
+    public static List<Block> getPlacedBlocks() {
+        return placedBlocks;
     }
 }

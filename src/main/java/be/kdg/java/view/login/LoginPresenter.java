@@ -9,8 +9,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.paint.Color;
 
 public class LoginPresenter {
-    private Game model;
-    private LoginView view;
+    private final Game model;
+    private final LoginView view;
 
     public LoginPresenter(Game model, LoginView view) {
         this.model = model;

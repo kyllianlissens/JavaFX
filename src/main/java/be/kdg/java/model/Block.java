@@ -4,9 +4,9 @@ import java.awt.*;
 
 public class Block {
 
-    private BlockShape shape;
+    private final BlockShape shape;
 
-    private Point location; //Location of the block, unneeded?
+    private Point location;
 
     public Block(BlockShape Shape){
             this.shape = Shape;
@@ -16,9 +16,6 @@ public class Block {
         return shape;
     }
 
-    public void setShape(BlockShape shape) {
-        this.shape = shape;
-    }
 
     public Point getLocation() {
         return location;
@@ -27,4 +24,6 @@ public class Block {
     public void setLocation(Point location) {
         this.location = location;
     }
+
+
 }

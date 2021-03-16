@@ -10,8 +10,8 @@ import javafx.event.EventHandler;
 
 
 public class SettingsPresenter {
-    private Game model;
-    private SettingsView view;
+    private final Game model;
+    private final SettingsView view;
 
     public SettingsPresenter(Game model, SettingsView view) {
         this.model = model;

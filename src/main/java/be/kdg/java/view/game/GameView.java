@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 
 public class GameView extends GridPane {
 
@@ -14,12 +15,11 @@ public class GameView extends GridPane {
 
 
     private GridPane block1, block2, block3;
-;
 
     private HBox buttonHBox;
     private Button highscoresButton;
     private Button settingsButton;
-
+    private Text currentScore;
 
     private HBox blocksHBox;
 
@@ -33,6 +33,7 @@ public class GameView extends GridPane {
         this.settingsButton = new Button("Settings");
         this.buttonHBox = new HBox(10);
         this.blocksHBox = new HBox(30);
+        this.currentScore = new Text("Score: 0");
         gamePane = new GridPane();
         block1 = new GridPane();
         block2 = new GridPane();
@@ -55,10 +56,12 @@ public class GameView extends GridPane {
         this.blocksHBox.setAlignment(Pos.CENTER);
         this.blocksHBox.getChildren().addAll(block1, block2, block3);
         this.add(gamePane, 0,0);
-        this.add(buttonHBox, 0,2);
-
-
         this.add(blocksHBox, 0,1);
+        this.add(buttonHBox, 0,2);
+        this.add(currentScore, 0,3);
+
+
+
 
 
     }
@@ -77,5 +80,9 @@ public class GameView extends GridPane {
 
     public HBox getBlocksHBox() {
         return blocksHBox;
+    }
+
+    public Text getCurrentScore() {
+        return currentScore;
     }
 }

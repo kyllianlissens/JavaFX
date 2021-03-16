@@ -4,11 +4,14 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class Game {
     private final Gameboard gameBoard;
-    private List<Block> blocksToBeUsed;
+    static private List<Block> blocksToBeUsed;
     private final UserReaderWriter userReaderWriter;
     private User user;
     public int score;
@@ -24,7 +27,7 @@ public class Game {
 
     public void placeBlock(Block block, int x, int y) throws Exception {
         if (gameBoard.placeBlock(block, new Point(x, y))){
-            blocksToBeUsed.remove(block);
+            System.out.println(blocksToBeUsed.remove(block));
             if (blocksToBeUsed.size() == 0){
                 generateNewBlocks();
             }
@@ -41,12 +44,23 @@ public class Game {
         */
         //horizontaal
         for(int i = 0; i < gameBoard.getPointGrid().size();i++){
-            if(gameBoard.getPointGrid().get(i).stream().allMatch(e->e.getColor().equals(Color.white))){
-                score += 10;
-                gameBoard.getPointGrid().get(i).forEach(e->e.setColor(Color.black));
+            if(gameBoard.getPointGrid().get(i).stream().allMatch(e->e.getColor().equals(Color.BLACK))){
+
+                int finalI = i;
+                gameBoard.getPointGrid().get(i).forEach(withCounter((index, e) -> {
+                    Block b = Gameboard.getPlacedBlocks().stream().filter(element -> element.getLocation().y == finalI  && element.getLocation().x == index).findAny().orElse(null);
+                    if (b != null){
+                        System.out.println("Score to be added: " + b.getShape().getDifficulty());
+                        score += b.getShape().getDifficulty();
+
+                    }
+                    e.setColor(Color.white);
+                }));
+
+
             }
 
-        }
+        }/*
         //verticaal
         for (int i = 0; i < gameBoard.getPointGrid().size(); i++) {
             if(gameBoard.getPointGrid().get(i).stream().allMatch(e->e.getColor().equals(Color.white))){
@@ -64,7 +78,7 @@ public class Game {
                 }
 
             }
-        }
+        }*/
 
 
     }
@@ -79,12 +93,12 @@ public class Game {
         }
     }
 
-    public void login(String username, String wachtwoord) throws Exception {
-        this.user = userReaderWriter.login(username, wachtwoord);
+    public void login(String username, String password) throws Exception {
+        this.user = userReaderWriter.login(username, password);
     }
 
-    public void register(String username, String wachtwoord) throws Exception{
-        this.user = userReaderWriter.register(username, wachtwoord);
+    public void register(String username, String password) throws Exception{
+        this.user = userReaderWriter.register(username, password);
     }
 
     public void save(){
@@ -107,4 +121,9 @@ public class Game {
         return user;
     }
 
+
+    public static <T> Consumer<T> withCounter(BiConsumer<Integer, T> consumer) {
+        AtomicInteger counter = new AtomicInteger(0);
+        return item -> consumer.accept(counter.getAndIncrement(), item);
+    }
 }

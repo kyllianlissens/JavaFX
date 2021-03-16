@@ -2,7 +2,6 @@ package be.kdg.java.view.game;
 
 
 import be.kdg.java.model.Block;
-import be.kdg.java.model.BlockShape;
 import be.kdg.java.model.Game;
 import be.kdg.java.view.highscores.HighscorePresenter;
 import be.kdg.java.view.highscores.HighscoreView;
@@ -12,23 +11,22 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 
 import java.awt.*;
+import java.io.*;
+import java.util.Arrays;
+import java.util.Base64;
 
 
 public class GamePresenter {
-    private Game model;
-    private GameView view;
+    private final Game model;
+    private final GameView view;
 
-    private BlockShape selectedBlock;
+    private Block selectedBlock;
 
     public GamePresenter(Game model, GameView view) {
         this.model = model;
@@ -57,19 +55,14 @@ public class GamePresenter {
                 }
         );
 
-        EventHandler<MouseEvent> dragDetected = new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                System.out.println("In drag detect event");
-                GridPane source = (GridPane) event.getSource();
-                selectedBlock = BlockShape.valueOf(source.getId());
-                //Het image wordt in het DragBoard gestopt tijdens de transfer
-                Dragboard dragboard = source.startDragAndDrop(TransferMode.MOVE);
-                ClipboardContent content = new ClipboardContent();
-                content.putImage(source.snapshot(new SnapshotParameters(), null));
-                dragboard.setContent(content);
-                event.consume();
-            }
+        EventHandler<MouseEvent> dragDetected = event -> {
+            GridPane source = (GridPane) event.getSource();
+            selectedBlock = model.getBlocksToBeUsed().get(Integer.parseInt(source.getId()));
+            Dragboard dragboard = source.startDragAndDrop(TransferMode.MOVE);
+            ClipboardContent content = new ClipboardContent();
+            content.putImage(source.snapshot(new SnapshotParameters(), null));
+            dragboard.setContent(content);
+            event.consume();
         };
 
 
@@ -89,55 +82,35 @@ public class GamePresenter {
             double point2 = Math.round((point1 - Math.floor(point1)) * 12 + 1);
 
 
-            r.setOnDragOver(new EventHandler<DragEvent>() {
-                public void handle(DragEvent event) {
-                    if (event.getGestureSource() != r && event.getDragboard().hasImage()) {
-                        event.acceptTransferModes(TransferMode.MOVE);
-                    }
-                    event.consume();
+            r.setOnDragOver(event -> {
+                if (event.getGestureSource() != r && event.getDragboard().hasImage()) {
+                    event.acceptTransferModes(TransferMode.MOVE);
                 }
+                event.consume();
             });
-            int finalI = i;
-            r.setOnDragDropped(new EventHandler<DragEvent>() {
-                public void handle(DragEvent event) {
-                    Dragboard db = event.getDragboard();
-                    boolean success = false;
-                    if (db.hasImage()) {
-
-                        System.out.println("Index " + finalI);
-
-                        System.out.println("Setting Point1 (Before transfer):"+  point1);
-                        System.out.println("Setting Point2 (Before transfer):"+  point2);
-
-                        System.out.println("Setting Point1:"+  (int)point1);
-                        System.out.println("Setting Point2:"+  (int)point2);
-
-                        System.out.println("Block: " + selectedBlock.name());
-                        for (Point p : selectedBlock.getTiles()){
-                            System.out.println("Point Y " + p.getY());
-                            System.out.println("Point X " + p.getX());
-                            int newY = (int) (point1 + p.getY()) ;
-                            int newX = (int) (point2 + p.getX()) ;
-
-                            System.out.println("New Y: " + newY);
-                            System.out.println("New X: " + newX);
-                            model.getGameBoard().getPointGrid().get(newY-1).get(newX-1).setColor(java.awt.Color.WHITE);
-                        }
-
-                        updateView();
-                        addEventHandlers();
+            r.setOnDragDropped(event -> {
+                Dragboard db = event.getDragboard();
+                boolean success = false;
+                if (db.hasImage()) {
+                    try {
+                        model.placeBlock(selectedBlock, (int)point2, (int) point1);
+                        success = true;
+                    } catch (Exception exception) {
+                        System.out.println(exception.getMessage());
+                        //Make popup
                     }
-                    event.setDropCompleted(success);
-                    event.consume();
+
                 }
+                event.setDropCompleted(success);
+                event.consume();
             });
 
         }
 
         EventHandler<DragEvent> dragDone = new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
-      ;
-
+                updateView();
+                addEventHandlers();
                 event.consume();
             }
         };
@@ -152,55 +125,61 @@ public class GamePresenter {
 
 
 
-    private void updateView() {
-        //GridPane.setRowIndex(tile, i);
-        //GridPane.setColumnIndex(tile, j);
-        //gameBoard.getChildren().addAll(tile, text);
-        //tile.setOnMouseClicked(event -> drawMove(text));
+    private void updateView(){
 
+
+        view.getCurrentScore().setText("Score: " + model.score);
+        //Clear Game Pane
         view.getGamePane().getChildren().clear();
-
+        //Fuel game pane with tiles.
         for (int i = 0; i < model.getGameBoard().getSizeY(); i++) {
             for (int j = 0; j < model.getGameBoard().getSizeX(); j++) {
-
-
                 Color c = Color.WHITE;
-
-                if (model.getGameBoard().getPointGrid().get(i).get(j).getColor().equals(java.awt.Color.white)) c = Color.BLACK;
-
+                if (model.getGameBoard().getPointGrid().get(i).get(j).getColor().equals(java.awt.Color.BLACK)) c = Color.BLACK;
                 Rectangle tile = new Rectangle(35, 35);
                 tile.setFill(c);
                 tile.setStroke(Color.BLACK);
                 GridPane.setMargin(tile, new Insets(1.0));
                 view.getGamePane().add(tile, j, i);
-                //GridPane.setRowIndex(tile, i);
-                //GridPane.setColumnIndex(tile, j);
-                //gameBoard.getChildren().addAll(tile, text);
             }
         }
-
+        //Clear all Blocks
+        view.getBlocksHBox().getChildren().clear();
+        //For each block that can be used make our pane
         for (int i = 0; i < model.getBlocksToBeUsed().size(); i++) {
+            GridPane pane = new GridPane();
+            //We set the index Id as the Pane Id so we know which block is being placed
+            pane.setId(String.valueOf(i));
+            int index = 1;
+            boolean negativeXBlock = false;
+            boolean negativeYBlock = false;
+            System.out.println(model.getBlocksToBeUsed().get(i).getShape().name());
 
+            pane.setPrefSize(100,100);
 
-            GridPane pane = (GridPane) view.getBlocksHBox().getChildren().get(i);
+            for (int j = 0; j < 3; j++) {
+                for (int k = 0; k < 3; k++) {
+                    int finalJ = j;
+                    int finalK = k;
+                    Rectangle tile = new Rectangle(35, 35);
 
-            pane.getChildren().clear();
-            pane.setId(model.getBlocksToBeUsed().get(i).getShape().name());
-            for (Point p : model.getBlocksToBeUsed().get(i).getShape().getTiles()){
-                Rectangle tile = new Rectangle(20, 20);
-                tile.setFill(Color.BLACK);
-                tile.setStroke(Color.BLACK);
-                GridPane.setMargin(tile, new Insets(1.0));
-                pane.add(tile, Math.abs(p.x), Math.abs(p.y));
+                    GridPane.setMargin(tile, new Insets(1.0));
+                    if (Arrays.stream(model.getBlocksToBeUsed().get(i).getShape().getTiles()).anyMatch(e -> e.y ==  finalJ && e.x == finalK)){
+                        tile.setFill(Color.BLACK);
+                        tile.setStroke(Color.BLACK);
+                    }else{
+                        tile.setFill(new Color(0,0,0, 0));
+
+                    }
+                    pane.add(tile, k, j);
+                }
+
             }
 
-
-
+            view.getBlocksHBox().getChildren().add(pane);
         }
-
-
-
-
-
     }
+
+
+
 }

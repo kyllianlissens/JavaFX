@@ -11,8 +11,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 
 public class HighscorePresenter {
-    private Game model;
-    private HighscoreView view;
+    private final Game model;
+    private final HighscoreView view;
 
     public HighscorePresenter(Game model, HighscoreView view) {
         this.model = model;
