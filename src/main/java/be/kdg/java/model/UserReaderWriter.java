@@ -61,7 +61,7 @@ public class UserReaderWriter {
     }
     public void save(){
         ObjectMapper mapper = new ObjectMapper();
-        try (FileWriter writer = new FileWriter("highscores.json");
+        try (FileWriter writer = new FileWriter(Objects.requireNonNull(getClass().getClassLoader().getResource("highscores.json")).getPath());
              BufferedWriter bw = new BufferedWriter(writer)) {
              bw.write(mapper.writeValueAsString(users));
         } catch (IOException e) {

@@ -11,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Alert;
 import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -23,7 +24,7 @@ import java.util.Base64;
 
 
 public class GamePresenter {
-    private final Game model;
+    private Game model;
     private final GameView view;
 
     private Block selectedBlock;
@@ -66,9 +67,7 @@ public class GamePresenter {
         };
 
 
-
-
-        for (Node n: view.getBlocksHBox().getChildren()){
+        for (Node n : view.getBlocksHBox().getChildren()) {
             n.setOnDragDetected(dragDetected);
         }
 
@@ -77,8 +76,7 @@ public class GamePresenter {
             Node r = view.getGamePane().getChildren().get(i);
 
 
-
-            double point1 = (i/12.0)+1.0;
+            double point1 = (i / 12.0) + 1.0;
             double point2 = Math.round((point1 - Math.floor(point1)) * 12 + 1);
 
 
@@ -93,10 +91,18 @@ public class GamePresenter {
                 boolean success = false;
                 if (db.hasImage()) {
                     try {
-                        model.placeBlock(selectedBlock, (int)point2, (int) point1);
+                        model.placeBlock(selectedBlock, (int) point2, (int) point1);
                         success = true;
                     } catch (Exception exception) {
-                        System.out.println(exception.getMessage());
+
+                        exception.printStackTrace();
+
+                        showAlert(Alert.AlertType.ERROR, exception.getMessage(), exception.getMessage());
+                        if (exception.getMessage().equals("Game over")) {
+                            model = new Game();
+
+
+                        }
                         //Make popup
                     }
 
@@ -115,7 +121,7 @@ public class GamePresenter {
             }
         };
 
-        for (Node n: view.getBlocksHBox().getChildren()){
+        for (Node n : view.getBlocksHBox().getChildren()) {
             n.setOnDragDone(dragDone);
         }
 
@@ -123,9 +129,7 @@ public class GamePresenter {
     }
 
 
-
-
-    private void updateView(){
+    private void updateView() {
 
 
         view.getCurrentScore().setText("Score: " + model.score);
@@ -135,7 +139,8 @@ public class GamePresenter {
         for (int i = 0; i < model.getGameBoard().getSizeY(); i++) {
             for (int j = 0; j < model.getGameBoard().getSizeX(); j++) {
                 Color c = Color.WHITE;
-                if (model.getGameBoard().getPointGrid().get(i).get(j).getColor().equals(java.awt.Color.BLACK)) c = Color.BLACK;
+                if (model.getGameBoard().getPointGrid().get(i).get(j).getColor().equals(java.awt.Color.BLACK))
+                    c = Color.BLACK;
                 Rectangle tile = new Rectangle(35, 35);
                 tile.setFill(c);
                 tile.setStroke(Color.BLACK);
@@ -153,9 +158,8 @@ public class GamePresenter {
             int index = 1;
             boolean negativeXBlock = false;
             boolean negativeYBlock = false;
-            System.out.println(model.getBlocksToBeUsed().get(i).getShape().name());
 
-            pane.setPrefSize(100,100);
+            pane.setPrefSize(100, 100);
 
             for (int j = 0; j < 3; j++) {
                 for (int k = 0; k < 3; k++) {
@@ -164,11 +168,11 @@ public class GamePresenter {
                     Rectangle tile = new Rectangle(35, 35);
 
                     GridPane.setMargin(tile, new Insets(1.0));
-                    if (Arrays.stream(model.getBlocksToBeUsed().get(i).getShape().getTiles()).anyMatch(e -> e.y ==  finalJ && e.x == finalK)){
+                    if (Arrays.stream(model.getBlocksToBeUsed().get(i).getShape().getTiles()).anyMatch(e -> e.y == finalJ && e.x == finalK)) {
                         tile.setFill(Color.BLACK);
                         tile.setStroke(Color.BLACK);
-                    }else{
-                        tile.setFill(new Color(0,0,0, 0));
+                    } else {
+                        tile.setFill(new Color(0, 0, 0, 0));
 
                     }
                     pane.add(tile, k, j);
@@ -180,6 +184,12 @@ public class GamePresenter {
         }
     }
 
-
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.show();
+    }
 
 }

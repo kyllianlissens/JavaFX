@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
-public class ChartView extends BorderPane  {
+public class ChartView extends BorderPane {
 
     private BarChart barChart;
     private Button backButton;
@@ -19,6 +19,7 @@ public class ChartView extends BorderPane  {
         this.initialiseNodes();
         this.layoutNodes();
     }
+
     private void initialiseNodes() {
 
         CategoryAxis xAxis = new CategoryAxis();
@@ -33,18 +34,19 @@ public class ChartView extends BorderPane  {
     }
 
     private void layoutNodes() {
-        this.setPadding(new Insets(25, 25, 25,25));
+        this.setPadding(new Insets(25, 25, 25, 25));
         this.setCenter(barChart);
 
         this.buttonHBox.setAlignment(Pos.CENTER);
         this.buttonHBox.getChildren().addAll(this.backButton);
-       this.setBottom(buttonHBox);
+        this.setBottom(buttonHBox);
 
     }
 
     public Button getBackButton() {
         return backButton;
     }
+
     public BarChart getBarChart() {
         return barChart;
     }

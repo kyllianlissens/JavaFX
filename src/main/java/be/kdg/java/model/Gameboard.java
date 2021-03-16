@@ -1,4 +1,5 @@
 package be.kdg.java.model;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class Gameboard {
     private final int sizeX;
     private final int sizeY;
 
-    public Gameboard(int sizeX, int sizeY){
+    public Gameboard(int sizeX, int sizeY) {
 
         placedBlocks = new ArrayList<>();
 
@@ -32,58 +33,52 @@ public class Gameboard {
         }
     }
 
-    public Gameboard(){
-        this(12,12); //default size
+    public Gameboard() {
+        this(12, 12); //default size
     }
 
-    public boolean placeBlock(Block block, Point point){
-        System.out.println("Test= " + point);
 
+    public boolean canPlaceBlock(Block block, Point point) {
 
-        //We check all the points first
         for (Point p : block.getShape().getTiles()) {
 
             Point calcPoint = new Point(point.x + p.x, point.y + p.y);
             Rectangle gridPoint;
-            try{
-                gridPoint = pointGrid.get(calcPoint.y-2).get(calcPoint.x-2);
-            }catch (IndexOutOfBoundsException exception){
-                System.out.println("Out of index: " + point);
+            try {
+                gridPoint = pointGrid.get(calcPoint.y - 2).get(calcPoint.x - 2);
+            } catch (IndexOutOfBoundsException exception) {
                 return false;
             }
 
-            if (gridPoint.getColor() == Color.BLACK){
-                System.out.println("Block placed: " + point);
+            if (gridPoint.getColor() == Color.BLACK) {
                 return false; //WHITE = Block already has been placed there.
             }
 
 
         }
 
-
-        for (Point p : block.getShape().getTiles()) {
-
-
-
-            Point calcPoint = new Point(point.x + p.x, point.y + p.y);
-            System.out.println("Shape Point: " + p.toString());
-            System.out.println("Point location: " + point.toString());
-            System.out.println("Calculated location: " + calcPoint.toString());
-            Rectangle gridPoint =  pointGrid.get(calcPoint.y-2).get(calcPoint.x-2);
-
-            gridPoint.setColor(Color.BLACK);
-
-
-        }
-
-
-        block.setLocation(point);
-        placedBlocks.add(block);
         return true;
-
     }
 
+    public boolean placeBlock(Block block, Point point) {
 
+        if (canPlaceBlock(block, point)) {
+            for (Point p : block.getShape().getTiles()) {
+
+                Point calcPoint = new Point(point.x + p.x, point.y + p.y);
+                Rectangle gridPoint = pointGrid.get(calcPoint.y - 2).get(calcPoint.x - 2);
+
+                gridPoint.setColor(Color.BLACK);
+
+
+            }
+            block.setLocation(point);
+            placedBlocks.add(block);
+            return true;
+        } else return false;
+
+
+    }
 
 
     public ArrayList<ArrayList<Rectangle>> getPointGrid() {
