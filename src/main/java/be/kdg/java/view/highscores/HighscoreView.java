@@ -37,7 +37,7 @@ public class HighscoreView extends VBox {
 
     private void layoutNodes() {
         this.setAlignment(Pos.CENTER);
-        this.setPadding(new Insets(25, 25, 25,25));
+        this.setPadding(new Insets(40, 40, 40,40));
         this.setSpacing(20);
 
         this.title.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
@@ -71,7 +71,8 @@ public class HighscoreView extends VBox {
                 "    -fx-font-weight: bold;\n" +
                 "    -fx-font-size: 1.1em;");
         this.title.setStyle(" -fx-font-size: 32px;\n" + "-fx-font-family: \"Arial Black\";\n" + "   -fx-fill: #818181;\n" + "   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );");
-        this.highscores.setStyle("");
+        this.highscores.setStyle("-fx-color: #903b12;-fx-background-color: #903b12;-fx-text-fill: white;-fx-font:13px serif;-fx-padding:10; ");
+
 
 
 
