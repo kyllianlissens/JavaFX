@@ -34,6 +34,7 @@ public class LoginView extends GridPane {
 
 
 
+
     public LoginView() {
         this.initialiseNodes();
         this.layoutNodes();
@@ -76,12 +77,13 @@ public class LoginView extends GridPane {
 
         this.add(buttonHBox, 1,4);
         //hier komt alle styling
-        setStyle("-fx-background-image: url(images/woodenbackground.jpg)");
-        this.welcomeTitle.setStyle("-fx-font-size: 20px;fx-font-weight: 900;-fx-background-color: gray;");
-        this.usernameLabel.setStyle("-fx-font-size:18px; fx-font-weight: 900 ;");
-        this.passwordLabel.setStyle("-fx-font-size:18px; fx-font-weight: 900 ;");
+        setStyle("-fx-background-image: url(images/wood.jpg);-fx-background-size: cover;");
+        this.welcomeTitle.setStyle(" -fx-font-size: 32px;\n" + "-fx-font-family: \"Arial Black\";\n" + "   -fx-fill: #818181;\n" + "   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );");
+        this.usernameLabel.setStyle("-fx-fill: FIREBRICK;\n" + "  -fx-font-weight: bold;\n" + "  -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 ); -fx-font-size:18px;");
+        this.passwordLabel.setStyle("-fx-fill: FIREBRICK;\n" + "  -fx-font-weight: bold;\n" + "  -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 ); -fx-font-size:18px;");
         this.loginButton.setStyle("-fx-color: gray;-fx-font-size: 14px;");
         this.registerButton.setStyle("-fx-color: black;-fx-font-size: 14px;");
+
 
 
 

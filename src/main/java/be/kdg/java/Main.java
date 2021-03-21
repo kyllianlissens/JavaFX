@@ -1,6 +1,8 @@
 package be.kdg.java;
 
 import be.kdg.java.model.Game;
+import be.kdg.java.view.gameover.GameoverPresenter;
+import be.kdg.java.view.gameover.GameoverView;
 import be.kdg.java.view.login.LoginPresenter;
 import be.kdg.java.view.login.LoginView;
 import javafx.application.Application;
