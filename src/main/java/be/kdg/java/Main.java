@@ -8,15 +8,22 @@ import be.kdg.java.view.login.LoginView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import java.io.File;
+
 
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         Game model = new Game();
-        LoginView loginView = new LoginView();
-        new LoginPresenter(model, loginView);
+        GameoverView loginView = new GameoverView();
+        new GameoverPresenter(model, loginView);
         primaryStage.setScene(new Scene(loginView));
         primaryStage.show();
+
+
+
 
     }
 

@@ -22,6 +22,10 @@ public class SettingsView extends GridPane {
     private Text rowText;
     private TextField rowInput;
 
+    private HBox collumnSettings;
+    private Text collumnText;
+    private TextField collumnInput;
+
     private Button backButton;
     private HBox buttonHBox;
 
@@ -30,7 +34,7 @@ public class SettingsView extends GridPane {
         layoutNodes();
     }
     private void initialiseNodes() {
-        this.soundSettings = new HBox(75);
+        this.soundSettings = new HBox(200);
         this.soundText = new Text("Sound");
         this.soundCheckBox = new CheckBox();
 
@@ -40,6 +44,11 @@ public class SettingsView extends GridPane {
         this.rowSettings = new HBox(75);
         this.rowText = new Text("Rows");
         this.rowInput = new TextField("Rows");
+
+        this.collumnSettings = new HBox(48);
+        this.collumnText = new Text("Columns");
+        this.collumnInput = new TextField("Columns");
+
 
         this.buttonHBox = new HBox(75);
         this.backButton = new Button("Back");
@@ -63,7 +72,15 @@ public class SettingsView extends GridPane {
         this.rowSettings.setAlignment(Pos.CENTER);
         this.rowSettings.getChildren().addAll(this.rowText, this.rowInput);
 
+
+        this.collumnText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+        this.collumnSettings.getChildren().addAll( this.collumnText,this.collumnInput);
+
+
+
         this.add(rowSettings, 1,2);
+
+        this.add(collumnSettings,1,3);
 
         this.buttonHBox.setAlignment(Pos.CENTER);
         this.buttonHBox.getChildren().addAll(this.backButton);

@@ -52,6 +52,7 @@ public class ChartView extends BorderPane {
                 "    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );\n" +
                 "    -fx-font-weight: bold;\n" +
                 "    -fx-font-size: 1.1em;");
+        this.barChart.setStyle("-fx-fill: black;\n" + "  -fx-font-weight: bold;\n" + "  -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 ); -fx-font-size:22px;");
 
     }
 

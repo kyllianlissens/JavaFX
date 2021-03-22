@@ -8,6 +8,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import java.io.File;
+import javafx.scene.media.MediaView;
+
 
 public class GameView extends GridPane {
 
@@ -25,6 +30,7 @@ public class GameView extends GridPane {
 
     private HBox blocksHBox;
 
+
     public GameView(){
         initialiseNodes();
         layoutNodes();
@@ -40,6 +46,9 @@ public class GameView extends GridPane {
         block1 = new GridPane();
         block2 = new GridPane();
         block3 = new GridPane();
+
+
+
         // bvb.:
         // button = new Button("...")
         // label = new Label("...")
@@ -104,4 +113,5 @@ public class GameView extends GridPane {
     public Text getCurrentScore() {
         return currentScore;
     }
+
 }

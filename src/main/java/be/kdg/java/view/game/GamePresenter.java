@@ -22,19 +22,29 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.Base64;
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
 
 public class GamePresenter {
     private Game model;
     private final GameView view;
+    private boolean firstPlaced;
 
     private Block selectedBlock;
+    private Media pick;
+    private MediaPlayer player;
+
 
     public GamePresenter(Game model, GameView view) {
         this.model = model;
         this.view = view;
+        firstPlaced = false;
         updateView();
         addEventHandlers();
-
+        File f = new File("resources/music/gamesong.mp3");
+        pick = new Media(f.toURI().toString());
+        player = new MediaPlayer(pick);
     }
 
     private void addEventHandlers() {
@@ -57,6 +67,14 @@ public class GamePresenter {
         );
 
         EventHandler<MouseEvent> dragDetected = event -> {
+
+            if (!firstPlaced) {
+
+                player.play();
+
+                firstPlaced = true;
+            }
+
             GridPane source = (GridPane) event.getSource();
             selectedBlock = model.getBlocksToBeUsed().get(Integer.parseInt(source.getId()));
             Dragboard dragboard = source.startDragAndDrop(TransferMode.MOVE);
