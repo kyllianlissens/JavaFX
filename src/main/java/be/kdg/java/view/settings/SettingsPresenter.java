@@ -7,6 +7,7 @@ import be.kdg.java.view.game.GamePresenter;
 import be.kdg.java.view.game.GameView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.media.MediaPlayer;
 
 
 public class SettingsPresenter {
@@ -35,15 +36,17 @@ public class SettingsPresenter {
                 }
         );
         view.getMusicButton().setOnAction(event -> {
-            if (musicButton.isSelected()) {
-                menuPlayer.pause();
+            if (model.getMediaPlayer().getStatus().equals(MediaPlayer.Status.PLAYING)) {
+                model.getMediaPlayer().pause();
             }else {
-                menuPlayer.play();
+                model.getMediaPlayer().play();
+                model.getMediaPlayer().setVolume(0.1);
             }
         });
     }
 
     private void updateView() {
-        // Vult de view met data uit model
+        view.getMusicButton().setSelected(model.getMediaPlayer().getStatus().equals(MediaPlayer.Status.PLAYING));
+
     }
 }

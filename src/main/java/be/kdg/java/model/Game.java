@@ -1,5 +1,7 @@
 package be.kdg.java.model;
 
+import javafx.scene.media.MediaPlayer;
+
 import java.awt.*;
 import java.util.*;
 import java.util.List;
@@ -14,6 +16,7 @@ public class Game {
     private final UserReaderWriter userReaderWriter;
     private User user;
     public int score;
+    private MediaPlayer mediaPlayer;
 
     public Game() {
         gameBoard = new Gameboard();
@@ -123,5 +126,13 @@ public class Game {
     public static <T> Consumer<T> withCounter(BiConsumer<Integer, T> consumer) {
         AtomicInteger counter = new AtomicInteger(0);
         return item -> consumer.accept(counter.getAndIncrement(), item);
+    }
+
+    public MediaPlayer getMediaPlayer() {
+        return mediaPlayer;
+    }
+
+    public void setMediaPlayer(MediaPlayer mediaPlayer) {
+        this.mediaPlayer = mediaPlayer;
     }
 }

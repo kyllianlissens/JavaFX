@@ -44,7 +44,11 @@ public class GamePresenter {
         addEventHandlers();
         File f = new File("resources/music/gamesong.mp3");
         pick = new Media(f.toURI().toString());
-        player = new MediaPlayer(pick);
+
+        if(model.getMediaPlayer() == null){
+            model.setMediaPlayer(new MediaPlayer(pick));
+        }
+
     }
 
     private void addEventHandlers() {
@@ -70,8 +74,8 @@ public class GamePresenter {
 
             if (!firstPlaced) {
 
-                player.play();
-
+                model.getMediaPlayer().play();
+                model.getMediaPlayer().setVolume(0.1);
                 firstPlaced = true;
             }
 
