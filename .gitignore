@@ -1,1 +1,10 @@
 *.class
+/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+/out/artifacts/javafx_jar/highscores.json
+/target/highscores.json
+/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+/out/artifacts/javafx_jar/java
+/out/artifacts/javafx_jar/javafx.jar
+/target/javafx.jar
+/target/maven-archiver/pom.properties
+/out/artifacts/javafx_jar/text.txt
