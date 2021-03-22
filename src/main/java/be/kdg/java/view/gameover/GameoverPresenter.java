@@ -12,16 +12,15 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 import java.io.File;
 
 public class GameoverPresenter {
     private final Game model;
     private final GameoverView view;
-    private Media pick;
-    private MediaPlayer player;
-    private boolean firstPlaced;
-
+    private final Media pick;
+    private final MediaPlayer player;
 
 
     public GameoverPresenter(Game model, GameoverView view) {
@@ -29,35 +28,26 @@ public class GameoverPresenter {
         this.view = view;
         addEventHandlers();
         updateView();
-        firstPlaced = false;
         File f = new File("resources/music/gameover.mp3");
         pick = new Media(f.toURI().toString());
         player = new MediaPlayer(pick);
         player.play();
 
     }
-    private void updateView()
-    {
+
+    private void updateView() {
 
     }
 
-    private void addEventHandlers ()
-    {
+    private void addEventHandlers() {
         view.getBackButton().setOnAction(
-                new EventHandler<ActionEvent>() {
-
-                    @Override
-                    public void handle(ActionEvent actionEvent) {
-                        GameView gameView = new GameView();
-                        GamePresenter gamePresenter = new GamePresenter(model, gameView);
-                        view.getScene().setRoot(gameView);
-                        gameView.getScene().getWindow().sizeToScene();
-                    }
+                actionEvent -> {
+                    final Stage stage = (Stage) view.getScene().getWindow();
+                    stage.close();
                 }
         );
         view.getCurrentScore().setText("Score: " + model.score);
-        //Clear Game Pane
-
+        view.getHighScore().setText("Highscore: " + model.getUser().getHighscore());
 
     }
 

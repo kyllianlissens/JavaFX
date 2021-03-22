@@ -21,15 +21,11 @@ public class ChartPresenter {
 
     private void addEventHandlers() {
         view.getBackButton().setOnAction(
-                new EventHandler<ActionEvent>() {
-
-                    @Override
-                    public void handle(ActionEvent actionEvent) {
-                        GameView gameView = new GameView();
-                        GamePresenter gamePresenter = new GamePresenter(model, gameView);
-                        view.getScene().setRoot(gameView);
-                        gameView.getScene().getWindow().sizeToScene();
-                    }
+                actionEvent -> {
+                    GameView gameView = new GameView();
+                    new GamePresenter(model, gameView);
+                    view.getScene().setRoot(gameView);
+                    gameView.getScene().getWindow().sizeToScene();
                 }
         );
     }

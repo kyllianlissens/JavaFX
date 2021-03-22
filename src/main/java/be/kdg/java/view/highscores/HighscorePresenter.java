@@ -6,9 +6,6 @@ import be.kdg.java.view.chart.ChartView;
 import be.kdg.java.view.game.GamePresenter;
 import be.kdg.java.view.game.GameView;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.Alert;
 
 public class HighscorePresenter {
     private final Game model;
@@ -23,28 +20,20 @@ public class HighscorePresenter {
 
     private void addEventHandlers() {
         view.getBackButton().setOnAction(
-                new EventHandler<ActionEvent>() {
-
-                    @Override
-                    public void handle(ActionEvent actionEvent) {
-                        GameView gameView = new GameView();
-                        GamePresenter gamePresenter = new GamePresenter(model, gameView);
-                        view.getScene().setRoot(gameView);
-                        gameView.getScene().getWindow().sizeToScene();
-                    }
+                actionEvent -> {
+                    GameView gameView = new GameView();
+                    new GamePresenter(model, gameView);
+                    view.getScene().setRoot(gameView);
+                    gameView.getScene().getWindow().sizeToScene();
                 }
         );
 
         view.getStatsButton().setOnAction(
-                new EventHandler<ActionEvent>() {
-
-                    @Override
-                    public void handle(ActionEvent actionEvent) {
-                        ChartView chartView = new ChartView();
-                        ChartPresenter chartPresenter = new ChartPresenter(model, chartView);
-                        view.getScene().setRoot(chartView);
-                        chartView.getScene().getWindow().sizeToScene();
-                    }
+                actionEvent -> {
+                    ChartView chartView = new ChartView();
+                    new ChartPresenter(model, chartView);
+                    view.getScene().setRoot(chartView);
+                    chartView.getScene().getWindow().sizeToScene();
                 }
         );
 
@@ -56,11 +45,4 @@ public class HighscorePresenter {
         view.getHighscores().setItems(FXCollections.observableArrayList(model.getUserSortedByHighscore()));
     }
 
-    private void showAlert(Alert.AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.show();
-    }
 }

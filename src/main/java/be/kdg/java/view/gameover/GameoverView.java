@@ -18,20 +18,11 @@ import javafx.scene.text.Text;
 
 public class GameoverView  extends GridPane {
 
-    private GridPane grid;
-
     private Label gameOver;
-
-
     private HBox buttonHBox;
-
     private Button backButton;
-
     private Text currentScore;
     private Text highScore;
-
-
-
 
     public GameoverView(){
        initialiseNodes();
@@ -41,17 +32,10 @@ public class GameoverView  extends GridPane {
     private void initialiseNodes() {
 
         this.gameOver = new Label("Game over");
-
-
         this.buttonHBox = new HBox(10);
-
         this.backButton = new Button("Back");
-
         this.currentScore = new Text("Score: 0");
         this.highScore = new Text("Highscore: 0");
-
-
-
 
     }
 
@@ -62,16 +46,12 @@ public class GameoverView  extends GridPane {
         this.setVgap(10);
         this.setPadding(new Insets(50, 50, 50, 50));
 
-
-        this.add(gameOver, 0,0,2,1);
-
-        this.add(currentScore, 0, 1);
-        this.add(highScore, 0,2);
-
-
         this.buttonHBox.setAlignment(Pos.CENTER_RIGHT);
         this.buttonHBox.getChildren().addAll(this.backButton);
 
+        this.add(gameOver, 0,0,2,1);
+        this.add(currentScore, 0, 1);
+        this.add(highScore, 0,2);
         this.add(buttonHBox, 1,4);
 
         setStyle("-fx-background-image: url(images/wood.jpg);-fx-background-size: cover;\n");

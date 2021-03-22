@@ -3,15 +3,9 @@ package be.kdg.java.view.game;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import java.io.File;
-import javafx.scene.media.MediaView;
 
 
 public class GameView extends GridPane {
@@ -46,12 +40,6 @@ public class GameView extends GridPane {
         block1 = new GridPane();
         block2 = new GridPane();
         block3 = new GridPane();
-
-
-
-        // bvb.:
-        // button = new Button("...")
-        // label = new Label("...")
     }
 
     private void layoutNodes() {
@@ -60,6 +48,7 @@ public class GameView extends GridPane {
         this.setHgap(10);
         this.setVgap(10);
         this.setPadding(new Insets(50, 50, 50, 50));
+
 
         this.buttonHBox.setAlignment(Pos.CENTER);
         this.buttonHBox.getChildren().addAll(highscoresButton,settingsButton);
@@ -70,6 +59,7 @@ public class GameView extends GridPane {
         this.add(blocksHBox, 0,1);
         this.add(buttonHBox, 0,2);
         this.add(currentScore, 0,3);
+
 
 
 

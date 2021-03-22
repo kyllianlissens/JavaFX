@@ -3,13 +3,7 @@ package be.kdg.java.view.login;
 import be.kdg.java.model.Game;
 import be.kdg.java.view.game.GamePresenter;
 import be.kdg.java.view.game.GameView;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
-import javafx.scene.paint.Color;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import java.io.File;
 
 
 public class LoginPresenter {
@@ -27,44 +21,36 @@ public class LoginPresenter {
 
     private void addEventHandlers() {
         view.getLoginButton().setOnAction(
-                new EventHandler<ActionEvent>() {
+                actionEvent -> {
+                    try {
+                        model.login(view.getUsernameTextField().getText(), view.getPasswordTextField().getText());
 
-                    @Override
-                    public void handle(ActionEvent actionEvent) {
-                        try {
-                            model.login(view.getUsernameTextField().getText(), view.getPasswordTextField().getText());
-
-                            GameView gameView = new GameView();
-                            GamePresenter gamePresenter = new GamePresenter(model, gameView);
-                            view.getScene().setRoot(gameView);
-                            gameView.getScene().getWindow().sizeToScene();
+                        GameView gameView = new GameView();
+                        new GamePresenter(model, gameView);
+                        view.getScene().setRoot(gameView);
+                        gameView.getScene().getWindow().sizeToScene();
 
 
-                        } catch (Exception exception) {
-                            exception.printStackTrace();
-                            showAlert(Alert.AlertType.ERROR, exception.getMessage(), exception.getMessage());
-                        }
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                        showAlert(Alert.AlertType.ERROR, exception.getMessage(), exception.getMessage());
                     }
                 }
         );
 
         view.getRegisterButton().setOnAction(
-                new EventHandler<ActionEvent>() {
-
-                    @Override
-                    public void handle(ActionEvent actionEvent) {
-                        try {
-                            model.register(view.getUsernameTextField().getText(), view.getPasswordTextField().getText());
-                        } catch (Exception exception) {
-                            showAlert(Alert.AlertType.ERROR, exception.getMessage(), exception.getMessage());
-                        }
+                actionEvent -> {
+                    try {
+                        model.register(view.getUsernameTextField().getText(), view.getPasswordTextField().getText());
+                    } catch (Exception exception) {
+                        showAlert(Alert.AlertType.ERROR, exception.getMessage(), exception.getMessage());
                     }
                 }
         );
     }
 
     private void updateView() {
-        // Vult de view met data uit model
+
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {

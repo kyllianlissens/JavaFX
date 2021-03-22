@@ -1,13 +1,13 @@
 package be.kdg.java.model;
 
+import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 import java.awt.*;
-import java.util.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class Game {
@@ -16,14 +16,28 @@ public class Game {
     private final UserReaderWriter userReaderWriter;
     private User user;
     public int score;
-    private MediaPlayer mediaPlayer;
+    private final MediaPlayer mediaPlayer;
+    private boolean playMusic;
 
     public Game() {
+
+        File f = new File("resources/music/gamesong.mp3");
+        Media pick = new Media(f.toURI().toString());
+
+        score = 0;
+        playMusic = true;
+
         gameBoard = new Gameboard();
         blocksToBeUsed = new ArrayList<>();
-        generateNewBlocks();
         userReaderWriter = new UserReaderWriter();
-        score = 0;
+
+        mediaPlayer = new MediaPlayer(pick);
+        mediaPlayer.play();
+        mediaPlayer.setVolume(0.02);
+
+        generateNewBlocks();
+
+
     }
 
 
@@ -42,20 +56,17 @@ public class Game {
         }
 
 
-
         for (int i = 0; i < gameBoard.getPointGrid().size(); i++) {
             if (gameBoard.getPointGrid().get(i).stream().allMatch(e -> e.getColor().equals(Color.BLACK))) {
                 score += 10;
-                gameBoard.getPointGrid().get(i).forEach(horizontalBlock -> {
-                    horizontalBlock.setColor(Color.white);
-                });
+                gameBoard.getPointGrid().get(i).forEach(horizontalBlock -> horizontalBlock.setColor(Color.white));
             }
 
             for (int j = 0; j < gameBoard.getPointGrid().get(i).size(); j++) {
                 int finalYValue = j;
-                if(gameBoard.getPointGrid().stream().allMatch(e-> e.get(finalYValue).getColor().equals(Color.black))){
+                if (gameBoard.getPointGrid().stream().allMatch(e -> e.get(finalYValue).getColor().equals(Color.black))) {
                     score += 10;
-                    gameBoard.getPointGrid().forEach(e-> e.get(finalYValue).setColor(Color.white));
+                    gameBoard.getPointGrid().forEach(e -> e.get(finalYValue).setColor(Color.white));
                 }
             }
         }
@@ -73,21 +84,19 @@ public class Game {
         }
 
         if (!canBlocksStillBePlaced) {
-            if (score > user.getHighscore()){
+            if (score > user.getHighscore()) {
                 User userToSave = userReaderWriter.getUsers().stream().filter(e -> e.getUsername().equals(user.getUsername())).findAny().get();
                 userToSave.setHighscore(score);
                 save();
             }
 
             throw new Exception("Game over");
-        };
+        }
 
     }
 
 
-
     public void generateNewBlocks() {
-        //This feels off to init the array and then fill it?
         blocksToBeUsed.clear();
         for (int i = 0; i < 3; i++) {
             blocksToBeUsed.add(new Block(BlockShape.randomEnum()));
@@ -122,11 +131,16 @@ public class Game {
         return user;
     }
 
+    public boolean isPlayMusic() {
+        return playMusic;
+    }
+
+    public void setPlayMusic(boolean playMusic) {
+        this.playMusic = playMusic;
+    }
+
     public MediaPlayer getMediaPlayer() {
         return mediaPlayer;
     }
 
-    public void setMediaPlayer(MediaPlayer mediaPlayer) {
-        this.mediaPlayer = mediaPlayer;
-    }
 }

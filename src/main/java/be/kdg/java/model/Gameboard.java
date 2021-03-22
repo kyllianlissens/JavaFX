@@ -65,7 +65,6 @@ public class Gameboard {
 
 
             }
-            block.setLocation(point);
             placedBlocks.add(block);
             return true;
         } else return false;

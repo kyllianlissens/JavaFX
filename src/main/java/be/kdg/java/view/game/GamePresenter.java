@@ -3,6 +3,8 @@ package be.kdg.java.view.game;
 
 import be.kdg.java.model.Block;
 import be.kdg.java.model.Game;
+import be.kdg.java.view.gameover.GameoverPresenter;
+import be.kdg.java.view.gameover.GameoverView;
 import be.kdg.java.view.highscores.HighscorePresenter;
 import be.kdg.java.view.highscores.HighscoreView;
 import be.kdg.java.view.settings.SettingsPresenter;
@@ -10,43 +12,31 @@ import be.kdg.java.view.settings.SettingsView;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Alert;
 import javafx.scene.input.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
-import java.awt.*;
-import java.io.*;
 import java.util.Arrays;
-import java.util.Base64;
-
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 
 
 public class GamePresenter {
     private Game model;
     private final GameView view;
-    private boolean firstPlaced;
 
     private Block selectedBlock;
-    private Media pick;
 
 
     public GamePresenter(Game model, GameView view) {
         this.model = model;
         this.view = view;
-        firstPlaced = false;
         updateView();
         addEventHandlers();
-        File f = new File("resources/music/gamesong.mp3");
-        pick = new Media(f.toURI().toString());
-
-        if(model.getMediaPlayer() == null){
-            model.setMediaPlayer(new MediaPlayer(pick));
-        }
 
     }
 
@@ -71,10 +61,8 @@ public class GamePresenter {
 
         EventHandler<MouseEvent> dragDetected = event -> {
 
-            if (!model.getMediaPlayer().getStatus().equals(MediaPlayer.Status.PLAYING)) {
+            if (model.isPlayMusic()) {
                 model.getMediaPlayer().play();
-                model.getMediaPlayer().setVolume(0.05);
-                firstPlaced = true;
             }
 
             GridPane source = (GridPane) event.getSource();
@@ -117,13 +105,26 @@ public class GamePresenter {
 
                         exception.printStackTrace();
 
-                        showAlert(Alert.AlertType.ERROR, exception.getMessage(), exception.getMessage());
+
                         if (exception.getMessage().equals("Game over")) {
+                            GameoverView gameoverView = new GameoverView();
+                            new GameoverPresenter(model,gameoverView);
+                            Stage aboutStage= new Stage();
+                            aboutStage.initOwner(view.getScene().getWindow());
+                            aboutStage.initModality(Modality.APPLICATION_MODAL);
+                            aboutStage.setScene(new Scene(gameoverView));
+                            aboutStage.setX(view.getScene().getWindow().getX() + 100);
+                            aboutStage.setY(view.getScene().getWindow().getY() + 100);
+                            aboutStage.showAndWait();
+
+                            model.getMediaPlayer().stop();
+                            model = null;
                             model = new Game();
 
 
+                        }else{
+                            showAlert(Alert.AlertType.ERROR, exception.getMessage(), exception.getMessage());
                         }
-                        //Make popup
                     }
 
                 }
@@ -133,12 +134,10 @@ public class GamePresenter {
 
         }
 
-        EventHandler<DragEvent> dragDone = new EventHandler<DragEvent>() {
-            public void handle(DragEvent event) {
-                updateView();
-                addEventHandlers();
-                event.consume();
-            }
+        EventHandler<DragEvent> dragDone = event -> {
+            updateView();
+            addEventHandlers();
+            event.consume();
         };
 
         for (Node n : view.getBlocksHBox().getChildren()) {
@@ -175,9 +174,6 @@ public class GamePresenter {
             GridPane pane = new GridPane();
             //We set the index Id as the Pane Id so we know which block is being placed
             pane.setId(String.valueOf(i));
-            int index = 1;
-            boolean negativeXBlock = false;
-            boolean negativeYBlock = false;
 
             pane.setPrefSize(100, 100);
 

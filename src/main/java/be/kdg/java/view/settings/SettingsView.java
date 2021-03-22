@@ -117,13 +117,12 @@ public class SettingsView extends GridPane {
     public TextField getRowInput() {
         return rowInput;
     }
-
     public TextField getColumnInput() {
         return columnInput;
     }
-
-
-
+    public Button getSaveButton() {
+        return saveButton;
+    }
     public Button getBackButton() {
         return backButton;
     }
