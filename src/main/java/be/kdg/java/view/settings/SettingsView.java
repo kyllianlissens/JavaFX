@@ -15,8 +15,7 @@ import javafx.scene.text.Text;
 public class SettingsView extends GridPane {
 
     private HBox soundSettings;
-    private Text soundText;
-    private CheckBox soundCheckBox;
+   private Button musicButton;
 
     private HBox rowSettings;
     private Text rowText;
@@ -34,10 +33,8 @@ public class SettingsView extends GridPane {
         layoutNodes();
     }
     private void initialiseNodes() {
-        this.soundSettings = new HBox(200);
-        this.soundText = new Text("Sound");
-        this.soundCheckBox = new CheckBox();
-
+        this.soundSettings = new HBox(10);
+        this.musicButton = new Button("Music on/off");
 
 
 
@@ -62,9 +59,9 @@ public class SettingsView extends GridPane {
         this.setVgap(10);
         this.setPadding(new Insets(20, 20, 20, 20));
 
-        this.soundText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+
         this.soundSettings.setAlignment(Pos.CENTER);
-        this.soundSettings.getChildren().addAll(this.soundText, this.soundCheckBox);
+        this.soundSettings.getChildren().addAll(this.musicButton);
 
         this.add(soundSettings, 1,1);
 
@@ -104,4 +101,5 @@ public class SettingsView extends GridPane {
     public Button getBackButton() {
         return backButton;
     }
+    public Button getMusicButton() {return musicButton;}
 }

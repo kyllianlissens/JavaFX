@@ -12,6 +12,7 @@ import javafx.event.EventHandler;
 public class SettingsPresenter {
     private final Game model;
     private final SettingsView view;
+    private GameView game;
 
     public SettingsPresenter(Game model, SettingsView view) {
         this.model = model;
@@ -33,6 +34,13 @@ public class SettingsPresenter {
                     }
                 }
         );
+        view.getMusicButton().setOnAction(event -> {
+            if (musicButton.isSelected()) {
+                menuPlayer.pause();
+            }else {
+                menuPlayer.play();
+            }
+        });
     }
 
     private void updateView() {

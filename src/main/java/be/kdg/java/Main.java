@@ -17,13 +17,10 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         Game model = new Game();
-        GameoverView loginView = new GameoverView();
-        new GameoverPresenter(model, loginView);
+        LoginView loginView = new LoginView();
+        new LoginPresenter(model, loginView);
         primaryStage.setScene(new Scene(loginView));
         primaryStage.show();
-
-
-
 
     }
 
