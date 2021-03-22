@@ -12,25 +12,18 @@ public class Gameboard {
 
 
      */
-    private final ArrayList<ArrayList<Rectangle>> pointGrid;
+    private ArrayList<ArrayList<Rectangle>> pointGrid;
     static private List<Block> placedBlocks;
-    private final int sizeX;
-    private final int sizeY;
+    private int sizeX;
+    private int sizeY;
 
     public Gameboard(int sizeX, int sizeY) {
 
-        placedBlocks = new ArrayList<>();
 
         this.sizeX = sizeX;
         this.sizeY = sizeY;
 
-        pointGrid = new ArrayList<>();
-        for (int y = 0; y < sizeY; y++) { //2D Array creation & initialization
-            pointGrid.add(new ArrayList<>());//e
-            for (int x = 0; x < sizeX; x++) {
-                pointGrid.get(y).add(new be.kdg.java.model.Rectangle(Color.WHITE));
-            }
-        }
+        makeGrid(sizeX, sizeY);
     }
 
     public Gameboard() {
@@ -91,6 +84,27 @@ public class Gameboard {
 
     public int getSizeY() {
         return sizeY;
+    }
+
+    public void setSizeX(int sizeX) {
+        this.sizeX = sizeX;
+        makeGrid(sizeX, sizeY);
+    }
+
+    private void makeGrid(int sizeX, int sizeY) {
+        placedBlocks = new ArrayList<>();
+        pointGrid = new ArrayList<>();
+        for (int y = 0; y < sizeY; y++) { //2D Array creation & initialization
+            pointGrid.add(new ArrayList<>());//e
+            for (int x = 0; x < sizeX; x++) {
+                pointGrid.get(y).add(new Rectangle(Color.WHITE));
+            }
+        }
+    }
+
+    public void setSizeY(int sizeY) {
+        this.sizeY = sizeY;
+        makeGrid(sizeX, sizeY);
     }
 
     public static List<Block> getPlacedBlocks() {

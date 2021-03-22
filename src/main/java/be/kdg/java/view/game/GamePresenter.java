@@ -33,7 +33,6 @@ public class GamePresenter {
 
     private Block selectedBlock;
     private Media pick;
-    private MediaPlayer player;
 
 
     public GamePresenter(Game model, GameView view) {
@@ -55,7 +54,7 @@ public class GamePresenter {
         view.getHighscoresButton().setOnAction(
                 actionEvent -> {
                     HighscoreView highscoresView = new HighscoreView();
-                    HighscorePresenter highscoresPresenter = new HighscorePresenter(model, highscoresView);
+                    new HighscorePresenter(model, highscoresView);
                     view.getScene().setRoot(highscoresView);
                     highscoresView.getScene().getWindow().sizeToScene();
                 }
@@ -64,7 +63,7 @@ public class GamePresenter {
         view.getSettingsButton().setOnAction(
                 actionEvent -> {
                     SettingsView settingsView = new SettingsView();
-                    SettingsPresenter settingsPresenter = new SettingsPresenter(model, settingsView);
+                    new SettingsPresenter(model, settingsView);
                     view.getScene().setRoot(settingsView);
                     settingsView.getScene().getWindow().sizeToScene();
                 }
@@ -72,10 +71,9 @@ public class GamePresenter {
 
         EventHandler<MouseEvent> dragDetected = event -> {
 
-            if (!firstPlaced) {
-
+            if (!model.getMediaPlayer().getStatus().equals(MediaPlayer.Status.PLAYING)) {
                 model.getMediaPlayer().play();
-                model.getMediaPlayer().setVolume(0.1);
+                model.getMediaPlayer().setVolume(0.05);
                 firstPlaced = true;
             }
 
@@ -98,8 +96,8 @@ public class GamePresenter {
             Node r = view.getGamePane().getChildren().get(i);
 
 
-            double point1 = (i / 12.0) + 1.0;
-            double point2 = Math.round((point1 - Math.floor(point1)) * 12 + 1);
+            double point1 = (i / (double) model.getGameBoard().getSizeY()) + 1.0;
+            double point2 = Math.round((point1 - Math.floor(point1)) * model.getGameBoard().getSizeX() + 1);
 
 
             r.setOnDragOver(event -> {

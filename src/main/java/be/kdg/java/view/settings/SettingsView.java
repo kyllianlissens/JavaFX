@@ -5,7 +5,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
@@ -21,9 +20,9 @@ public class SettingsView extends GridPane {
     private Text rowText;
     private TextField rowInput;
 
-    private HBox collumnSettings;
-    private Text collumnText;
-    private TextField collumnInput;
+    private HBox columnSettings;
+    private Text columnText;
+    private TextField columnInput;
 
     private Button backButton;
     private HBox buttonHBox;
@@ -43,9 +42,9 @@ public class SettingsView extends GridPane {
         this.rowText = new Text("Rows");
         this.rowInput = new TextField("Rows");
 
-        this.collumnSettings = new HBox(48);
-        this.collumnText = new Text("Columns");
-        this.collumnInput = new TextField("Columns");
+        this.columnSettings = new HBox(48);
+        this.columnText = new Text("Columns");
+        this.columnInput = new TextField("Columns");
 
 
         this.buttonHBox = new HBox(75);
@@ -71,14 +70,14 @@ public class SettingsView extends GridPane {
         this.rowSettings.getChildren().addAll(this.rowText, this.rowInput);
 
 
-        this.collumnText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-        this.collumnSettings.getChildren().addAll( this.collumnText,this.collumnInput);
+        this.columnText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+        this.columnSettings.getChildren().addAll( this.columnText,this.columnInput);
 
 
 
         this.add(rowSettings, 1,2);
 
-        this.add(collumnSettings,1,3);
+        this.add(columnSettings,1,3);
 
         this.buttonHBox.setAlignment(Pos.CENTER);
         this.buttonHBox.getChildren().addAll(this.backButton);
@@ -99,6 +98,17 @@ public class SettingsView extends GridPane {
 
 
     }
+
+    public TextField getRowInput() {
+        return rowInput;
+    }
+
+    public TextField getColumnInput() {
+        return columnInput;
+    }
+
+
+
     public Button getBackButton() {
         return backButton;
     }

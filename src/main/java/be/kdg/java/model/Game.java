@@ -122,12 +122,6 @@ public class Game {
         return user;
     }
 
-
-    public static <T> Consumer<T> withCounter(BiConsumer<Integer, T> consumer) {
-        AtomicInteger counter = new AtomicInteger(0);
-        return item -> consumer.accept(counter.getAndIncrement(), item);
-    }
-
     public MediaPlayer getMediaPlayer() {
         return mediaPlayer;
     }
