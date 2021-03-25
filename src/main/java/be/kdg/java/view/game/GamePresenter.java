@@ -9,6 +9,8 @@ import be.kdg.java.view.highscores.HighscorePresenter;
 import be.kdg.java.view.highscores.HighscoreView;
 import be.kdg.java.view.settings.SettingsPresenter;
 import be.kdg.java.view.settings.SettingsView;
+import be.kdg.java.view.gamerules.GameRulesView;
+import be.kdg.java.view.gamerules.GameRulesPresenter;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -56,6 +58,15 @@ public class GamePresenter {
                     new SettingsPresenter(model, settingsView);
                     view.getScene().setRoot(settingsView);
                     settingsView.getScene().getWindow().sizeToScene();
+                }
+        );
+        view.getRulesButton().setOnAction(
+                actionEvent -> {
+                    System.out.println("NIGGA");
+                    GameRulesView rulesView = new GameRulesView();
+                    new GameRulesPresenter(model, rulesView);
+                    view.getScene().setRoot(rulesView);
+                    rulesView.getScene().getWindow().sizeToScene();
                 }
         );
 

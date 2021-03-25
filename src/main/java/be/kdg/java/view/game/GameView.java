@@ -20,6 +20,7 @@ public class GameView extends GridPane {
     private HBox buttonHBox;
     private Button highscoresButton;
     private Button settingsButton;
+    private Button rulesButton;
     private Text currentScore;
 
     private HBox blocksHBox;
@@ -33,6 +34,7 @@ public class GameView extends GridPane {
 
         this.highscoresButton = new Button("Highscores");
         this.settingsButton = new Button("Settings");
+        this.rulesButton = new Button("Rules");
         this.buttonHBox = new HBox(10);
         this.blocksHBox = new HBox(30);
         this.currentScore = new Text("Score: 0");
@@ -51,7 +53,7 @@ public class GameView extends GridPane {
 
 
         this.buttonHBox.setAlignment(Pos.CENTER);
-        this.buttonHBox.getChildren().addAll(highscoresButton,settingsButton);
+        this.buttonHBox.getChildren().addAll(highscoresButton,settingsButton, rulesButton);
 
         this.blocksHBox.setAlignment(Pos.CENTER);
         this.blocksHBox.getChildren().addAll(block1, block2, block3);
@@ -78,6 +80,17 @@ public class GameView extends GridPane {
                 "    -fx-font-size: 1.1em;");
         this.highscoresButton.setStyle("-fx-padding: 8 15 15 15;\n" + "    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;\n" + "    -fx-background-radius: 8;\n" + "    -fx-background-color: \n" + "        linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),\n" + "        #9d4024,\n" + "        #d86e3a,\n" + "        radial-gradient(center 50% 50%, radius 100%, #d86e3a, #c54e2c);\n" + "    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );\n" + "    -fx-font-weight: bold;\n" + "    -fx-font-size: 1.1em;");
         this.currentScore.setStyle("-fx-font-size: 32px;\n" + "-fx-font-family: \"Arial Black\";\n" + "   -fx-fill: #818181;\n" + "   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );");
+        this.rulesButton.setStyle("-fx-padding: 8 15 15 15;\n" +
+                "    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;\n" +
+                "    -fx-background-radius: 8;\n" +
+                "    -fx-background-color: \n" +
+                "        linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),\n" +
+                "        #9d4024,\n" +
+                "        #d86e3a,\n" +
+                "        radial-gradient(center 50% 50%, radius 100%, #d86e3a, #c54e2c);\n" +
+                "    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );\n" +
+                "    -fx-font-weight: bold;\n" +
+                "    -fx-font-size: 1.1em;");
 
         this.buttonHBox.setSpacing(30);
 
@@ -103,5 +116,7 @@ public class GameView extends GridPane {
     public Text getCurrentScore() {
         return currentScore;
     }
+
+    public Button getRulesButton() {return rulesButton;}
 
 }

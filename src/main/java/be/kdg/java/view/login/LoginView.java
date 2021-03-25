@@ -71,9 +71,9 @@ public class LoginView extends GridPane {
         this.add(buttonHBox, 1,4);
         //hier komt alle styling
         setStyle("-fx-background-image: url(images/wood.jpg);-fx-background-size: cover;");
-        this.welcomeTitle.setStyle(" -fx-font-size: 32px;\n" + "-fx-font-family: \"Arial Black\";\n" + "   -fx-fill: #818181;\n" + "   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );");
-        this.usernameLabel.setStyle("-fx-fill: FIREBRICK;\n" + "  -fx-font-weight: bold;\n" + "  -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 ); -fx-font-size:18px;");
-        this.passwordLabel.setStyle("-fx-fill: FIREBRICK;\n" + "  -fx-font-weight: bold;\n" + "  -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 ); -fx-font-size:18px;");
+        this.welcomeTitle.setStyle(" -fx-font-size: 32px;\n" + "-fx-font-family: \"Arial Black\";\n" + "   -fx-fill: orange;\n" + "   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );");
+        this.usernameLabel.setStyle("-fx-fill: orange;\n" + "  -fx-font-weight: bold;\n" + "  -fx-effect: dropshadow( gaussian , orangered , 0,0,0,1 ); -fx-font-size:18px;");
+        this.passwordLabel.setStyle("-fx-fill: orange;\n" + "  -fx-font-weight: bold;\n" + "  -fx-effect: dropshadow( gaussian , orangered , 0,0,0,1 ); -fx-font-size:18px;");
         this.loginButton.setStyle("-fx-padding: 8 15 15 15;\n" +
                 "    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;\n" +
                 "    -fx-background-radius: 8;\n" +
