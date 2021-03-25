@@ -4,8 +4,6 @@ import be.kdg.java.model.Game;
 import be.kdg.java.model.User;
 import be.kdg.java.view.game.GamePresenter;
 import be.kdg.java.view.game.GameView;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.chart.XYChart;
 
 public class ChartPresenter {
@@ -32,7 +30,7 @@ public class ChartPresenter {
 
     private void updateView() {
         XYChart.Series dataSeries1 = new XYChart.Series();
-        for (User user : model.getUserSortedByHighscore()){
+        for (User user : model.getUserSortedByHighscore()) {
             dataSeries1.getData().add(new XYChart.Data(user.getUsername(), user.getHighscore()));
         }
         this.view.getBarChart().getData().add(dataSeries1);

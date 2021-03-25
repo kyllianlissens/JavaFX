@@ -32,24 +32,24 @@ public class SettingsPresenter {
             if (model.isPlayMusic()) {
                 model.setPlayMusic(false);
                 model.getMediaPlayer().pause();
-            }else {
+            } else {
                 model.setPlayMusic(true);
                 model.getMediaPlayer().play();
             }
         });
 
-        view.getSaveButton().setOnAction(event->{
+        view.getSaveButton().setOnAction(event -> {
             model.getGameBoard().setSizeY(Integer.parseInt(view.getRowInput().getText()));
             model.getGameBoard().setSizeX(Integer.parseInt(view.getColumnInput().getText()));
         });
 
-        view.getRowInput().setOnKeyPressed(event ->{
-            if( event.getCode() == KeyCode.ENTER ) {
+        view.getRowInput().setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
                 model.getGameBoard().setSizeY(Integer.parseInt(view.getRowInput().getText()));
             }
         });
-        view.getColumnInput().setOnKeyPressed(event ->{
-            if( event.getCode() == KeyCode.ENTER ) {
+        view.getColumnInput().setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
                 model.getGameBoard().setSizeX(Integer.parseInt(view.getColumnInput().getText()));
             }
         });

@@ -1,7 +1,9 @@
 # Java FX Project
+
 Java FX project 2020
 
 ## Todo:
+
 - [x] Main classes
 - [x] Enum logic
 - [ ] Finish logic of storing unused/used points
@@ -15,9 +17,10 @@ Java FX project 2020
 - [ ] Detecten of blocks niet meer placed kunnen worden !!!!!!!!!!!!!!!!!!!!!!!!!
 - [ ] Highscore shit !!!!!!!!!!!!!
 
-
 ## Logs:
-###28/12:
+
+### 28/12:
+
 - Meeste van block placement klaar
 - Enums nog veranderen
 - Tijdelijk een Rectangle klasse gemaakt met Color
@@ -27,4 +30,4 @@ Java FX project 2020
 - Game constructor voelt nog raar
 - User klasse nog maken met highscore logica
 
-###28/12 ( Gevorg ):
+### 28/12 ( Gevorg ):

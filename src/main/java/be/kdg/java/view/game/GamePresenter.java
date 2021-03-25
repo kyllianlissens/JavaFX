@@ -5,12 +5,12 @@ import be.kdg.java.model.Block;
 import be.kdg.java.model.Game;
 import be.kdg.java.view.gameover.GameoverPresenter;
 import be.kdg.java.view.gameover.GameoverView;
+import be.kdg.java.view.gamerules.GameRulesPresenter;
+import be.kdg.java.view.gamerules.GameRulesView;
 import be.kdg.java.view.highscores.HighscorePresenter;
 import be.kdg.java.view.highscores.HighscoreView;
 import be.kdg.java.view.settings.SettingsPresenter;
 import be.kdg.java.view.settings.SettingsView;
-import be.kdg.java.view.gamerules.GameRulesView;
-import be.kdg.java.view.gamerules.GameRulesPresenter;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -28,9 +28,8 @@ import java.util.Arrays;
 
 
 public class GamePresenter {
-    private Game model;
     private final GameView view;
-
+    private Game model;
     private Block selectedBlock;
 
 
@@ -43,38 +42,27 @@ public class GamePresenter {
     }
 
     private void addEventHandlers() {
-        view.getHighscoresButton().setOnAction(
-                actionEvent -> {
-                    HighscoreView highscoresView = new HighscoreView();
-                    new HighscorePresenter(model, highscoresView);
-                    view.getScene().setRoot(highscoresView);
-                    highscoresView.getScene().getWindow().sizeToScene();
-                }
-        );
 
-        view.getSettingsButton().setOnAction(
-                actionEvent -> {
-                    SettingsView settingsView = new SettingsView();
-                    new SettingsPresenter(model, settingsView);
-                    view.getScene().setRoot(settingsView);
-                    settingsView.getScene().getWindow().sizeToScene();
-                }
-        );
-        view.getRulesButton().setOnAction(
-                actionEvent -> {
-                    System.out.println("NIGGA");
-                    GameRulesView rulesView = new GameRulesView();
-                    new GameRulesPresenter(model, rulesView);
-                    view.getScene().setRoot(rulesView);
-                    rulesView.getScene().getWindow().sizeToScene();
-                }
-        );
+        view.getHighscoresButton().setOnAction(actionEvent -> {
+            HighscoreView highscoresView = new HighscoreView();
+            new HighscorePresenter(model, highscoresView);
+            view.getScene().setRoot(highscoresView);
+            highscoresView.getScene().getWindow().sizeToScene();
+        });
+        view.getSettingsButton().setOnAction(actionEvent -> {
+            SettingsView settingsView = new SettingsView();
+            new SettingsPresenter(model, settingsView);
+            view.getScene().setRoot(settingsView);
+            settingsView.getScene().getWindow().sizeToScene();
+        });
+        view.getRulesButton().setOnAction(actionEvent -> {
+            GameRulesView rulesView = new GameRulesView();
+            new GameRulesPresenter(model, rulesView);
+            view.getScene().setRoot(rulesView);
+            rulesView.getScene().getWindow().sizeToScene();
+        });
 
         EventHandler<MouseEvent> dragDetected = event -> {
-
-            if (model.isPlayMusic()) {
-                model.getMediaPlayer().play();
-            }
 
             GridPane source = (GridPane) event.getSource();
             selectedBlock = model.getBlocksToBeUsed().get(Integer.parseInt(source.getId()));
@@ -93,8 +81,6 @@ public class GamePresenter {
 
         for (int i = 0; i < view.getGamePane().getChildren().size(); i++) {
             Node r = view.getGamePane().getChildren().get(i);
-
-
             double point1 = (i / (double) model.getGameBoard().getSizeY()) + 1.0;
             double point2 = Math.round((point1 - Math.floor(point1)) * model.getGameBoard().getSizeX() + 1);
 
@@ -105,6 +91,7 @@ public class GamePresenter {
                 }
                 event.consume();
             });
+
             r.setOnDragDropped(event -> {
                 Dragboard db = event.getDragboard();
                 boolean success = false;
@@ -113,31 +100,8 @@ public class GamePresenter {
                         model.placeBlock(selectedBlock, (int) point2, (int) point1);
                         success = true;
                     } catch (Exception exception) {
-
-                        exception.printStackTrace();
-
-
-                        if (exception.getMessage().equals("Game over")) {
-                            GameoverView gameoverView = new GameoverView();
-                            new GameoverPresenter(model,gameoverView);
-                            Stage aboutStage= new Stage();
-                            aboutStage.initOwner(view.getScene().getWindow());
-                            aboutStage.initModality(Modality.APPLICATION_MODAL);
-                            aboutStage.setScene(new Scene(gameoverView));
-                            aboutStage.setX(view.getScene().getWindow().getX() + 100);
-                            aboutStage.setY(view.getScene().getWindow().getY() + 100);
-                            aboutStage.showAndWait();
-
-                            model.getMediaPlayer().stop();
-                            model = null;
-                            model = new Game();
-
-
-                        }else{
-                            showAlert(Alert.AlertType.ERROR, exception.getMessage(), exception.getMessage());
-                        }
+                        showAlert(exception.getMessage(), exception.getMessage());
                     }
-
                 }
                 event.setDropCompleted(success);
                 event.consume();
@@ -146,8 +110,32 @@ public class GamePresenter {
         }
 
         EventHandler<DragEvent> dragDone = event -> {
+            if (model.checkGameOver()){
+
+                GameoverView gameoverView = new GameoverView();
+                new GameoverPresenter(model, gameoverView);
+                Stage aboutStage = new Stage();
+                aboutStage.initOwner(view.getScene().getWindow());
+                aboutStage.initModality(Modality.APPLICATION_MODAL);
+                aboutStage.setScene(new Scene(gameoverView));
+                aboutStage.setX(view.getScene().getWindow().getX() + 100);
+                aboutStage.setY(view.getScene().getWindow().getY() + 100);
+                aboutStage.showAndWait();
+
+                model.getMediaPlayer().stop();//stop instance music
+                model = null; // clear instance
+                model = new Game(); //make new instance
+
+                //reset view
+                GameView gameView = new GameView();
+                new GamePresenter(model, gameView);
+                view.getScene().setRoot(gameView);
+                gameView.getScene().getWindow().sizeToScene();
+
+            }
             updateView();
             addEventHandlers();
+
             event.consume();
         };
 
@@ -178,6 +166,8 @@ public class GamePresenter {
                 view.getGamePane().add(tile, j, i);
             }
         }
+
+
         //Clear all Blocks
         view.getBlocksHBox().getChildren().clear();
         //For each block that can be used make our pane
@@ -211,8 +201,8 @@ public class GamePresenter {
         }
     }
 
-    private void showAlert(Alert.AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);

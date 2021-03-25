@@ -11,7 +11,6 @@ import javafx.scene.text.Text;
 public class GameView extends GridPane {
 
 
-
     private GridPane gamePane;
 
 
@@ -26,10 +25,11 @@ public class GameView extends GridPane {
     private HBox blocksHBox;
 
 
-    public GameView(){
+    public GameView() {
         initialiseNodes();
         layoutNodes();
     }
+
     private void initialiseNodes() {
 
         this.highscoresButton = new Button("Highscores");
@@ -38,10 +38,10 @@ public class GameView extends GridPane {
         this.buttonHBox = new HBox(10);
         this.blocksHBox = new HBox(30);
         this.currentScore = new Text("Score: 0");
-        gamePane = new GridPane();
-        block1 = new GridPane();
-        block2 = new GridPane();
-        block3 = new GridPane();
+        this.gamePane = new GridPane();
+        this.block1 = new GridPane();
+        this.block2 = new GridPane();
+        this.block3 = new GridPane();
     }
 
     private void layoutNodes() {
@@ -53,17 +53,14 @@ public class GameView extends GridPane {
 
 
         this.buttonHBox.setAlignment(Pos.CENTER);
-        this.buttonHBox.getChildren().addAll(highscoresButton,settingsButton, rulesButton);
+        this.buttonHBox.getChildren().addAll(highscoresButton, settingsButton, rulesButton);
 
         this.blocksHBox.setAlignment(Pos.CENTER);
         this.blocksHBox.getChildren().addAll(block1, block2, block3);
-        this.add(gamePane, 0,0);
-        this.add(blocksHBox, 0,1);
-        this.add(buttonHBox, 0,2);
-        this.add(currentScore, 0,3);
-
-
-
+        this.add(gamePane, 0, 0);
+        this.add(blocksHBox, 0, 1);
+        this.add(buttonHBox, 0, 2);
+        this.add(currentScore, 0, 3);
 
 
         setStyle("-fx-background-image: url(images/wood.jpg);-fx-background-size: cover;");
@@ -94,7 +91,6 @@ public class GameView extends GridPane {
 
         this.buttonHBox.setSpacing(30);
 
-
     }
 
     public Button getHighscoresButton() {
@@ -117,6 +113,8 @@ public class GameView extends GridPane {
         return currentScore;
     }
 
-    public Button getRulesButton() {return rulesButton;}
+    public Button getRulesButton() {
+        return rulesButton;
+    }
 
 }

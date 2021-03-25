@@ -7,6 +7,7 @@ import be.kdg.java.view.game.GameView;
 public class GameRulesPresenter {
     private final Game model;
     private final GameRulesView view;
+
     public GameRulesPresenter(Game model, GameRulesView view) {
         this.model = model;
         this.view = view;

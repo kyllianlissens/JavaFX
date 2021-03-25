@@ -11,7 +11,6 @@ public class LoginPresenter {
     private final LoginView view;
 
 
-
     public LoginPresenter(Game model, LoginView view) {
         this.model = model;
         this.view = view;

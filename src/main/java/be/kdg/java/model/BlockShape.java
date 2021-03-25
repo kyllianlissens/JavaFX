@@ -28,16 +28,12 @@ public enum BlockShape {
         this.difficulty = difficulty;
     }
 
-    public int getDifficulty() {
-        return difficulty;
+    public static BlockShape randomEnum() {
+        return values()[(int) (Math.random() * values().length)];
     }
 
     public Point[] getTiles() {
         return tiles;
-    }
-
-    public static BlockShape randomEnum() {
-        return values()[(int) (Math.random() * values().length)];
     }
 
 }

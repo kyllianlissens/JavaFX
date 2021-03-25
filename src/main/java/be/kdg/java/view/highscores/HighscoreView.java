@@ -3,7 +3,8 @@ package be.kdg.java.view.highscores;
 import be.kdg.java.model.User;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -27,6 +28,7 @@ public class HighscoreView extends VBox {
         this.layoutNodes();
 
     }
+
     private void initialiseNodes() {
         this.title = new Text("Highscores");
         this.highscores = new ListView<User>();
@@ -37,7 +39,7 @@ public class HighscoreView extends VBox {
 
     private void layoutNodes() {
         this.setAlignment(Pos.CENTER);
-        this.setPadding(new Insets(40, 40, 40,40));
+        this.setPadding(new Insets(40, 40, 40, 40));
         this.setSpacing(20);
 
         this.title.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
@@ -74,12 +76,7 @@ public class HighscoreView extends VBox {
         this.highscores.setStyle("-fx-color: #903b12;-fx-background-color: #903b12;-fx-text-fill: white;-fx-font:13px serif;-fx-padding:10; ");
 
 
-
-
     }
-
-
-
 
 
     public ListView<User> getHighscores() {

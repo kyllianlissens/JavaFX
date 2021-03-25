@@ -28,7 +28,7 @@ public class SettingsView extends GridPane {
     private Button saveButton;
     private HBox buttonHBox;
 
-    public SettingsView(){
+    public SettingsView() {
         initialiseNodes();
         layoutNodes();
     }
@@ -36,7 +36,6 @@ public class SettingsView extends GridPane {
     private void initialiseNodes() {
         this.soundSettings = new HBox(10);
         this.musicButton = new CheckBox("Music on/off");
-
 
 
         this.rowSettings = new HBox(75);
@@ -53,7 +52,6 @@ public class SettingsView extends GridPane {
         this.saveButton = new Button("Save");
 
 
-
     }
 
     private void layoutNodes() {
@@ -66,7 +64,7 @@ public class SettingsView extends GridPane {
         this.soundSettings.setAlignment(Pos.CENTER_RIGHT);
         this.soundSettings.getChildren().addAll(this.musicButton);
 
-        this.add(soundSettings, 1,1);
+        this.add(soundSettings, 1, 1);
 
         this.rowText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         this.rowSettings.setAlignment(Pos.CENTER);
@@ -74,13 +72,12 @@ public class SettingsView extends GridPane {
 
 
         this.columnText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-        this.columnSettings.getChildren().addAll( this.columnText,this.columnInput);
+        this.columnSettings.getChildren().addAll(this.columnText, this.columnInput);
 
 
+        this.add(rowSettings, 1, 2);
 
-        this.add(rowSettings, 1,2);
-
-        this.add(columnSettings,1,3);
+        this.add(columnSettings, 1, 3);
 
         this.buttonHBox.setAlignment(Pos.CENTER);
         this.buttonHBox.getChildren().addAll(this.backButton, this.saveButton);
@@ -111,20 +108,25 @@ public class SettingsView extends GridPane {
         this.musicButton.setStyle("-fx-fill: FIREBRICK;\n" + "  -fx-font-weight: bold;\n" + "  -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 ); -fx-font-size:18px;");
 
 
-
     }
 
     public TextField getRowInput() {
         return rowInput;
     }
+
     public TextField getColumnInput() {
         return columnInput;
     }
+
     public Button getSaveButton() {
         return saveButton;
     }
+
     public Button getBackButton() {
         return backButton;
     }
-    public CheckBox getMusicButton() {return musicButton;}
+
+    public CheckBox getMusicButton() {
+        return musicButton;
+    }
 }

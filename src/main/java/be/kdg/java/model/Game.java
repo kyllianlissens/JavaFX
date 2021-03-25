@@ -11,15 +11,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Game {
-    private final Gameboard gameBoard;
     static private List<Block> blocksToBeUsed;
+    private final Gameboard gameBoard;
     private final UserReaderWriter userReaderWriter;
-    private User user;
-    public int score;
     private final MediaPlayer mediaPlayer;
+    public int score;
+    private User user;
     private boolean playMusic;
 
     public Game() {
+
 
         File f = new File("resources/music/gamesong.mp3");
         Media pick = new Media(f.toURI().toString());
@@ -35,6 +36,7 @@ public class Game {
         mediaPlayer.play();
         mediaPlayer.setVolume(0.02);
 
+
         generateNewBlocks();
 
 
@@ -42,17 +44,16 @@ public class Game {
 
 
     public void placeBlock(Block block, int x, int y) throws Exception {
-        if (gameBoard.placeBlock(block, new Point(x, y))) {
-
+        if (gameBoard.canPlaceBlock(block, new Point(x, y))){
+            gameBoard.placeBlock(block, new Point(x, y));
             score += 5;
-
             blocksToBeUsed.remove(block);
             if (blocksToBeUsed.size() == 0) {
                 generateNewBlocks();
             }
-
-        } else {
-            throw new Exception("Can't place block here");
+        }
+        else{
+            throw new Exception("You can't place a block here!");
         }
 
 
@@ -72,27 +73,32 @@ public class Game {
         }
 
 
-        boolean canBlocksStillBePlaced = false;
-        for (Block b : blocksToBeUsed) {
-            for (int i = 0; i < gameBoard.getPointGrid().size(); i++) {
-                for (int j = 0; j < gameBoard.getPointGrid().get(i).size(); j++) {
-                    if (gameBoard.canPlaceBlock(b, new Point(j, i))) {
-                        canBlocksStillBePlaced = true;
-                    }
-                }
-            }
-        }
 
-        if (!canBlocksStillBePlaced) {
+    }
+
+    public boolean checkGameOver(){
+        if (!canStillPlaceBlocks()) {
             if (score > user.getHighscore()) {
                 User userToSave = userReaderWriter.getUsers().stream().filter(e -> e.getUsername().equals(user.getUsername())).findAny().get();
                 userToSave.setHighscore(score);
                 save();
             }
-
-            throw new Exception("Game over");
+            return true;
         }
+        return false;
+    }
 
+    public boolean canStillPlaceBlocks(){
+        for (Block b : blocksToBeUsed) {
+            for (int i = 0; i < gameBoard.getPointGrid().size(); i++) {
+                for (int j = 0; j < gameBoard.getPointGrid().get(i).size(); j++) {
+                    if (gameBoard.canPlaceBlock(b, new Point(j, i))) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
 
@@ -142,5 +148,7 @@ public class Game {
     public MediaPlayer getMediaPlayer() {
         return mediaPlayer;
     }
+
+
 
 }

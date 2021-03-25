@@ -8,15 +8,16 @@ public class User {
     private String password;
     private int highscore;
 
-    public User(){} //Empty constructor for Jackson
+    public User() {
+    } //Empty constructor for Jackson
 
-    public User(String username, String password, int highscore){
+    public User(String username, String password, int highscore) {
         this.username = username;
         this.password = password;
         this.highscore = highscore;
     }
 
-    public User(String username, String password){
+    public User(String username, String password) {
         this(username, password, 0);
     }
 

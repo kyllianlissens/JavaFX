@@ -26,12 +26,11 @@ public class LoginView extends GridPane {
     private Text welcomeTitle;
 
 
-
-
     public LoginView() {
         this.initialiseNodes();
         this.layoutNodes();
     }
+
     private void initialiseNodes() {
         this.usernameLabel = new Label("Username: ");
         this.usernameTextField = new TextField();
@@ -56,19 +55,19 @@ public class LoginView extends GridPane {
         this.setPadding(new Insets(50, 50, 50, 50));
 
 
-        this.add(welcomeTitle, 0,0,2,1);
+        this.add(welcomeTitle, 0, 0, 2, 1);
 
         this.add(usernameLabel, 0, 1);
-        this.add(usernameTextField, 1,1);
+        this.add(usernameTextField, 1, 1);
 
-        this.add(passwordLabel, 0,2);
-        this.add(passwordTextField, 1,2);
+        this.add(passwordLabel, 0, 2);
+        this.add(passwordTextField, 1, 2);
 
 
         this.buttonHBox.setAlignment(Pos.CENTER_RIGHT);
         this.buttonHBox.getChildren().addAll(this.registerButton, this.loginButton);
 
-        this.add(buttonHBox, 1,4);
+        this.add(buttonHBox, 1, 4);
         //hier komt alle styling
         setStyle("-fx-background-image: url(images/wood.jpg);-fx-background-size: cover;");
         this.welcomeTitle.setStyle(" -fx-font-size: 32px;\n" + "-fx-font-family: \"Arial Black\";\n" + "   -fx-fill: orange;\n" + "   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );");
@@ -96,8 +95,6 @@ public class LoginView extends GridPane {
                 "    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );\n" +
                 "    -fx-font-weight: bold;\n" +
                 "    -fx-font-size: 1.1em;");
-
-
 
 
     }

@@ -1,17 +1,8 @@
 package be.kdg.java.view.gameover;
 
 import be.kdg.java.model.Game;
-import be.kdg.java.view.game.GamePresenter;
-import be.kdg.java.view.game.GameView;
-import be.kdg.java.view.settings.SettingsView;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.scene.layout.GridPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.File;

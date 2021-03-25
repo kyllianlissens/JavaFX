@@ -31,12 +31,13 @@ public class ChartView extends BorderPane {
 
         this.buttonHBox = new HBox(10);
         this.backButton = new Button("Back");
+
     }
 
     private void layoutNodes() {
         this.setPadding(new Insets(25, 25, 25, 25));
         this.setCenter(barChart);
-
+        this.barChart.setLegendVisible(false);
         this.buttonHBox.setAlignment(Pos.CENTER);
         this.buttonHBox.getChildren().addAll(this.backButton);
         this.setBottom(buttonHBox);
