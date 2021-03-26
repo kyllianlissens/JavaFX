@@ -25,7 +25,7 @@ public class Game {
     private final Gameboard gameBoard;
     private final UserReaderWriter userReaderWriter;
     private final MediaPlayer mediaPlayer;
-    public int score;
+    private int score;
     private User user;
     private boolean playMusic;
 
@@ -199,4 +199,7 @@ public class Game {
         return mediaPlayer;
     }
 
+    public int getScore() {
+        return score;
+    }
 }

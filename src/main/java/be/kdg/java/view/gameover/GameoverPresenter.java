@@ -37,7 +37,7 @@ public class GameoverPresenter {
                     stage.close();
                 }
         );
-        view.getCurrentScore().setText("Score: " + model.score);
+        view.getCurrentScore().setText("Score: " + model.getScore());
         view.getHighScore().setText("Highscore: " + model.getUser().getHighscore());
 
     }

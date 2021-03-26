@@ -150,7 +150,7 @@ public class GamePresenter {
     private void updateView() {
 
 
-        view.getCurrentScore().setText("Score: " + model.score);
+        view.getCurrentScore().setText("Score: " + model.getScore());
         //Clear Game Pane
         view.getGamePane().getChildren().clear();
         //Fuel game pane with tiles.
