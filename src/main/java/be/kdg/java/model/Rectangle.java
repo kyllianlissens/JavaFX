@@ -3,7 +3,7 @@ package be.kdg.java.model;
 
 import java.awt.*;
 
-public class Rectangle { //This class will soon be replaced with JavaFX classes but yeah 'console'
+public class Rectangle {
     private Color color;
 
     public Rectangle(Color color) {
@@ -17,6 +17,5 @@ public class Rectangle { //This class will soon be replaced with JavaFX classes 
     public void setColor(Color color) {
         this.color = color;
     }
-
 
 }

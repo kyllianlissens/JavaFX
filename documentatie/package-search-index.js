@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"be.kdg.java"},{"l":"be.kdg.java.model"},{"l":"be.kdg.java.view.chart"},{"l":"be.kdg.java.view.game"},{"l":"be.kdg.java.view.gameover"},{"l":"be.kdg.java.view.gamerules"},{"l":"be.kdg.java.view.highscores"},{"l":"be.kdg.java.view.login"},{"l":"be.kdg.java.view.settings"}]

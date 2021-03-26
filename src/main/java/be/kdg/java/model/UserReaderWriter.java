@@ -24,8 +24,6 @@ public class UserReaderWriter {
         } catch (IOException fileNotFoundException) {
             fileNotFoundException.printStackTrace();
         }
-
-
     }
 
     public List<User> getUsers() {

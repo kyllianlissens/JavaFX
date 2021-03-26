@@ -1,15 +1,21 @@
 package be.kdg.java.model;
 
-
+/**
+ * De gebruikers klasse
+ *
+ * @author Kyllian Lissens
+ * @version 1.0
+ */
 public class User {
-
 
     private String username;
     private String password;
     private int highscore;
 
-    public User() {
-    } //Empty constructor for Jackson
+    /**
+     * Constructor voor Jackson
+     */
+    public User() {}
 
     public User(String username, String password, int highscore) {
         this.username = username;

@@ -3,7 +3,12 @@ package be.kdg.java.model;
 import java.awt.*;
 import java.util.ArrayList;
 
-
+/**
+ * De klasse voor het bord van het spel
+ *
+ *  @author Kyllian Lissens
+ *  @version 1.0
+ */
 public class Gameboard {
 
     private ArrayList<ArrayList<Rectangle>> pointGrid;
@@ -11,19 +16,24 @@ public class Gameboard {
     private int sizeY;
 
     public Gameboard(int sizeX, int sizeY) {
-
-
         this.sizeX = sizeX;
         this.sizeY = sizeY;
-
         makeGrid(sizeX, sizeY);
     }
 
+    /**
+     * Default constructor
+     */
     public Gameboard() {
-        this(12, 12); //default size
+        this(12, 12);
     }
 
-
+    /**
+     * Checkt of een block op deze locatie geplaatst kan worden
+     * @param block de blok
+     * @param point de locatie
+     * @return true = kan geplaatst worden op deze locatie
+     */
     public boolean canPlaceBlock(Block block, Point point) {
 
         for (Point p : block.getShape().getTiles()) {
@@ -37,7 +47,7 @@ public class Gameboard {
             }
 
             if (gridPoint.getColor() == Color.BLACK) {
-                return false; //WHITE = Block already has been placed there.
+                return false;
             }
 
 
@@ -46,6 +56,11 @@ public class Gameboard {
         return true;
     }
 
+    /**
+     * Plaatst een blok op deze locatie
+     * @param block het blokje
+     * @param point de locatie
+     */
     public void placeBlock(Block block, Point point) {
 
         for (Point p : block.getShape().getTiles()) {
