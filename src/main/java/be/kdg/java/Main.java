@@ -18,9 +18,13 @@ public class Main extends Application {
         Game model = new Game();
         LoginView loginView = new LoginView();
         new LoginPresenter(model, loginView);
-        primaryStage.setScene(new Scene(loginView));
+        Scene scene = new Scene(loginView);
+        primaryStage.setScene(scene);
         primaryStage.show();
         primaryStage.setResizable(false);
+
+        scene.getStylesheets().add(getClass().getResource("/stylesheets/stylesheet.css").toExternalForm());
+
 
     }
 }

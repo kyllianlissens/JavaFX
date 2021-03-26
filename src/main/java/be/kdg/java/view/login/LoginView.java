@@ -68,8 +68,9 @@ public class LoginView extends GridPane {
         this.buttonHBox.getChildren().addAll(this.registerButton, this.loginButton);
 
         this.add(buttonHBox, 1, 4);
-        //hier komt alle styling
+        //hier komt styling van login, expleciet niet op stylesheet om daarna makkkelijker aan te passen
         setStyle("-fx-background-image: url(images/wood.jpg);-fx-background-size: cover;");
+        welcomeTitle.getStyleClass().add("welcomeTitle");
         this.welcomeTitle.setStyle(" -fx-font-size: 32px;\n" + "-fx-font-family: \"Arial Black\";\n" + "   -fx-fill: orange;\n" + "   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );");
         this.usernameLabel.setStyle("-fx-fill: orange;\n" + "  -fx-font-weight: bold;\n" + "  -fx-effect: dropshadow( gaussian , orangered , 0,0,0,1 ); -fx-font-size:18px;");
         this.passwordLabel.setStyle("-fx-fill: orange;\n" + "  -fx-font-weight: bold;\n" + "  -fx-effect: dropshadow( gaussian , orangered , 0,0,0,1 ); -fx-font-size:18px;");
