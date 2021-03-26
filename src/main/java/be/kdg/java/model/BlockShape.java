@@ -1,6 +1,11 @@
 package be.kdg.java.model;
 
 import java.awt.*;
+/**
+* Blockshapes in verschillende vormen , gebruik van Points
+ * 8 verschilende vormen gevormt door X enm Y coordinaten
+ * Randomizen met randomEnum
+ * */
 
 public enum BlockShape {
 

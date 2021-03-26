@@ -11,7 +11,9 @@ import java.util.stream.Collectors;
 
 public class UserReaderWriter {
     private List<User> users;
-
+    /**
+     * Default constructor
+     */
     public UserReaderWriter() {
         ObjectMapper mapper = new ObjectMapper();
         try {
@@ -29,7 +31,10 @@ public class UserReaderWriter {
     public List<User> getUsers() {
         return users;
     }
-
+    /**
+     * Registeren
+     * Ook gebruik van Bcrypt om te encrypteren
+     */
     public User register(String username, String password) throws Exception {
         for (User user : users) {
             if (user.getUsername().equalsIgnoreCase(username)) {
@@ -43,6 +48,10 @@ public class UserReaderWriter {
         return user;
 
     }
+    /**
+     * Inloggen
+     * Gebruik van Bcrypt om te encrypten
+     */
 
     public User login(String username, String password) throws Exception {
         for (User user : users) {
@@ -57,7 +66,9 @@ public class UserReaderWriter {
         throw new Exception("User " + username + " non existing!");
 
     }
-
+    /**
+     * Highscores en inloggegevens saven naar highscores.json
+     */
     public void save() {
         ObjectMapper mapper = new ObjectMapper();
         try (FileWriter writer = new FileWriter(Objects.requireNonNull(getClass().getClassLoader().getResource("highscores.json")).getPath());

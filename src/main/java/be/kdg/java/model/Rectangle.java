@@ -2,7 +2,9 @@ package be.kdg.java.model;
 
 
 import java.awt.*;
-
+/**
+ * Rectangle
+ */
 public class Rectangle {
     private Color color;
 
